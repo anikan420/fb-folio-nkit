@@ -6,6 +6,8 @@ import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { caseStudiesData } from '@/lib/data/caseStudies';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 export function CaseStudiesSection() {
   return (
@@ -35,10 +37,10 @@ export function CaseStudiesSection() {
               className="min-h-screen flex items-center justify-center py-12 md:py-20" // Each card is a full-height section
             >
               <ScrollRevealWrapper
-                threshold={0.2} // When 20% of the card section is visible
+                threshold={0.25} // When 25% of the card section is visible
                 once={true}
-                className="w-full max-w-5xl mx-auto" // Card container with max-width
-                delay={index * 150} // Stagger appearance of each card section
+                className="w-full max-w-5xl mx-auto px-4" // Card container with max-width
+                delay={50} // Stagger appearance of each card section
                 slideDirection="up"
                 slideOffset="10"
               >
@@ -49,45 +51,43 @@ export function CaseStudiesSection() {
                 >
                   <div // This is the styled card (grid, background, border, etc.)
                     className={cn(
-                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 rounded-2xl shadow-2xl overflow-hidden border border-border/20",
-                      "bg-card/50 backdrop-blur-lg", // Glassmorphism effect: semi-transparent card background with blur
+                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 rounded-2xl shadow-2xl overflow-hidden",
+                      "bg-card", // Solid card background from globals.css
+                      "border border-border/10", // Subtle resting border
                       "transition-all duration-300 ease-out",
-                      // Animated border on hover
-                      "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent before:group-hover:bg-[linear-gradient(135deg,theme(colors.primary/0.4),theme(colors.orange.500/0.4),theme(colors.green.500/0.4))] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 before:group-hover:opacity-100 before:transition-opacity before:duration-500"
+                      // Animated gradient border on hover
+                      "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent before:group-hover:bg-[linear-gradient(135deg,hsl(var(--chart-1))_0%,hsl(var(--chart-4))_50%,hsl(var(--chart-2))_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 before:group-hover:opacity-100 before:transition-opacity before:duration-500"
                     )}
                   >
                     {/* Text content block */}
                     <ScrollRevealWrapper
                       delay={100} // Delay relative to the card appearing
                       slideDirection={isTextOnLeft ? 'left' : 'right'}
-                      slideOffset="10"
+                      slideOffset="8"
                       className={cn(
                         `flex flex-col justify-center h-full`,
-                        isTextOnLeft ? 'md:col-start-1 md:row-start-1' : 'md:col-start-2 md:row-start-1'
+                        isTextOnLeft ? 'md:col-start-1 md:row-start-1' : 'md:col-start-2 md:row-start-1',
+                        'md:order-1' // Ensure text is appropriately ordered
                       )}
                     >
                       <div className={cn(
-                        `transition-transform duration-300 ease-out`,
-                        !isTextOnLeft
-                          ? 'group-hover:md:translate-x-1'
-                          : 'group-hover:md:-translate-x-1'
+                        `transition-transform duration-300 ease-out py-4 md:py-0`, // Added padding for vertical spacing
                       )}>
-                        <p className="mb-2 text-sm font-medium uppercase tracking-wider text-primary font-sans">
+                        <Badge variant="secondary" className="mb-4 text-xs px-3 py-1 bg-primary/10 border-primary/30 text-primary">
                           {study.category}
-                        </p>
+                        </Badge>
                         <h3 className="mb-4 text-3xl md:text-4xl font-bold text-foreground font-sans">
                           {study.title}
                         </h3>
-                        <p className="mb-6 text-lg text-foreground/80 font-sans">
+                        <p className="mb-6 text-lg text-foreground/80 font-sans line-clamp-3 md:line-clamp-none">
                           {study.description}
                         </p>
-                        <Link
-                          href={`/case-studies/${study.id}`}
-                          className="inline-flex items-center text-lg font-medium text-primary hover:text-primary/80 transition-colors group/link font-sans"
-                        >
-                          Read case study
-                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/link:translate-x-1" />
-                        </Link>
+                        <Button asChild size="default" className="mt-auto group-hover:bg-primary/90 transition-colors duration-300">
+                          <Link href={`/case-studies/${study.id}`}>
+                            Read case study
+                            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/link:translate-x-1" />
+                          </Link>
+                        </Button>
                       </div>
                     </ScrollRevealWrapper>
 
@@ -95,26 +95,24 @@ export function CaseStudiesSection() {
                     <ScrollRevealWrapper
                       delay={150} // Delay relative to the card appearing
                       slideDirection={isTextOnLeft ? 'right' : 'left'}
-                      slideOffset="10"
+                      slideOffset="8"
                       className={cn(
                         `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full aspect-[4/3] md:aspect-auto`,
-                        isTextOnLeft ? 'md:col-start-2 md:row-start-1' : 'md:col-start-1 md:row-start-1'
+                        isTextOnLeft ? 'md:col-start-2 md:row-start-1' : 'md:col-start-1 md:row-start-1',
+                         'md:order-2' // Ensure image is appropriately ordered
                       )}
                     >
                       <div className={cn(
                         `relative h-full w-full`,
                         `transition-transform duration-300 ease-out`,
                         "group-hover:scale-105",
-                        !isTextOnLeft
-                          ? 'group-hover:md:-translate-x-1'
-                          : 'group-hover:md:translate-x-1'
                       )}>
                         <Image
                           src={study.imageUrl}
                           alt={study.title}
                           layout="fill"
                           objectFit="cover"
-                          className="transition-transform duration-500 ease-out group-hover:scale-110"
+                          className="rounded-lg transition-transform duration-500 ease-out" // image itself can have rounded corners
                           data-ai-hint={study.dataAiHint}
                           priority={index < 2} // Prioritize first few images
                         />

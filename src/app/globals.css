@@ -7,7 +7,7 @@
     --background: 0 0% 3%; /* Near Black */
     --foreground: 0 0% 98%; /* Almost White */
 
-    --card: 224 71.4% 10%; /* Slightly Lighter Dark Blue for glass base (was 6.1%) */
+    --card: 260 25% 18%; /* Dark Muted Purple - for case study cards and other card elements */
     --card-foreground: 0 0% 98%;
 
     --popover: 224 71.4% 8%; /* Slightly Lighter Darker blue for glass base (was 4.1%) */
@@ -32,10 +32,10 @@
     --input: 220 14.3% 25%; /* Adjusted input border (was 20%) */
     --ring: 180 70% 40%; /* Brighter Teal Ring */
 
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
+    --chart-1: 12 76% 61%; /* Orange-Red */
+    --chart-2: 173 58% 39%; /* Green */
     --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
+    --chart-4: 43 74% 66%; /* Yellow-Orange */
     --chart-5: 27 87% 67%;
 
     --sidebar-background: 240 5.9% 10%;
@@ -52,7 +52,7 @@
     --background: 0 0% 3%; /* Near Black */
     --foreground: 0 0% 98%; /* Almost White */
 
-    --card: 224 71.4% 10%; /* Slightly Lighter Dark Blue for glass base */
+    --card: 260 25% 18%; /* Dark Muted Purple - for case study cards and other card elements */
     --card-foreground: 0 0% 98%;
 
     --popover: 224 71.4% 8%; /* Slightly Lighter Darker blue for glass base */
