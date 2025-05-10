@@ -54,9 +54,8 @@ export function CaseStudiesSection() {
                         "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden", 
                         "bg-card/60 backdrop-blur-lg", // Glassmorphism: --card color with 60% opacity and blur
                         "border border-border/10", 
-                        "transition-all duration-300 ease-out"
-                        // Removed gradient border hover effect styles:
-                        // "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.5)_0%,hsl(var(--chart-4)/0.5)_50%,hsl(var(--chart-2)/0.5)_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
+                        "transition-all duration-300 ease-out",
+                        "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.5)_0%,hsl(var(--chart-4)/0.5)_50%,hsl(var(--chart-2)/0.5)_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                       )}
                     >
                       {/* Text content block */}
@@ -86,11 +85,11 @@ export function CaseStudiesSection() {
                             asChild
                             variant="link"
                             size="lg"
-                            className="text-primary hover:text-primary/90 p-0 self-start"
+                            className="text-primary hover:text-primary/90 p-0 self-start font-semibold" // Added font-semibold here
                           >
-                            <span className="group-hover:underline inline-flex items-center font-semibold text-base">
+                            <span className="group-hover:underline inline-flex items-center text-base"> {/* text-base was here, font-semibold moved to Button for better control */}
                               Read case study
-                              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/link:translate-x-1" />
+                              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:rotate-45" />
                             </span>
                           </Button>
                         </div>
