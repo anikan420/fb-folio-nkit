@@ -85,11 +85,11 @@ export function CaseStudiesSection() {
                             asChild
                             variant="link"
                             size="lg"
-                            className="text-primary hover:text-primary/90 p-0 self-start font-semibold" // Added font-semibold here
+                            className="text-primary hover:text-primary/90 p-0 self-start font-semibold" 
                           >
-                            <span className="group-hover:underline inline-flex items-center text-base"> {/* text-base was here, font-semibold moved to Button for better control */}
+                            <span className="group-hover:underline inline-flex items-center text-base"> 
                               Read case study
-                              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:rotate-45" />
+                              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-rotate-45" />
                             </span>
                           </Button>
                         </div>
@@ -133,3 +133,4 @@ export function CaseStudiesSection() {
     </>
   );
 }
+
