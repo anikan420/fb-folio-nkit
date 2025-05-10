@@ -3,6 +3,7 @@ import { SectionWrapper } from '@/components/layout/SectionWrapper';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface CaseStudy {
   id: string;
@@ -81,13 +82,28 @@ export function CaseStudiesSection() {
 
       <div className="space-y-20 md:space-y-24">
         {caseStudiesData.map((study, index) => (
-          <div 
-            key={study.id} 
-            className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center ${
-              index % 2 !== 0 ? 'md:grid-flow-row-dense' : '' // Alternate layout for md screens
-            }`}
+          <div
+            key={study.id}
+            className={cn(
+              "group relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center p-6 md:p-8 bg-card rounded-2xl shadow-xl transition-all duration-300 ease-out hover:shadow-2xl hover:-translate-y-2",
+              index % 2 !== 0 ? 'md:grid-flow-row-dense' : ''
+            )}
           >
-            <div className={`flex flex-col justify-center ${index % 2 !== 0 ? 'md:col-start-2' : ''}`}>
+            {/* Colorful Gradient Glow */}
+            <div
+              className="absolute -inset-2 -z-10 rounded-3xl bg-gradient-to-br 
+                         from-primary/30 via-accent/30 to-secondary/30
+                         opacity-0 blur-xl transition-all duration-500 ease-out
+                         group-hover:opacity-60 group-hover:scale-105 group-hover:blur-2xl"
+            />
+
+            {/* Text content column */}
+            <div className={cn(
+              `flex flex-col justify-center transition-transform duration-300 ease-out`,
+              index % 2 !== 0 
+                ? 'md:col-start-2 group-hover:md:translate-x-1' 
+                : 'group-hover:md:-translate-x-1'
+            )}>
               <p className="mb-2 text-sm font-medium uppercase tracking-wider text-primary">
                 {study.category}
               </p>
@@ -101,19 +117,28 @@ export function CaseStudiesSection() {
                 href={study.liveLink || '#'}
                 target={study.liveLink && study.liveLink !== '#' ? '_blank' : '_self'}
                 rel={study.liveLink && study.liveLink !== '#' ? 'noopener noreferrer' : ''}
-                className="inline-flex items-center text-lg font-medium text-primary hover:text-primary/80 transition-colors group"
+                className="inline-flex items-center text-lg font-medium text-primary hover:text-primary/80 transition-colors group/link"
               >
                 Read case study
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/link:translate-x-1" />
               </Link>
             </div>
-            <div className={`relative h-80 md:h-[450px] w-full overflow-hidden rounded-xl shadow-2xl ${index % 2 !== 0 ? 'md:col-start-1' : ''}`}>
+
+            {/* Image column */}
+            <div className={cn(
+              `relative h-80 md:h-[450px] w-full overflow-hidden rounded-xl shadow-lg transition-transform duration-300 ease-out`,
+              index % 2 !== 0 ? 'md:col-start-1' : '',
+              "group-hover:scale-105",
+              index % 2 !== 0 
+                ? 'group-hover:md:-translate-x-1' 
+                : 'group-hover:md:translate-x-1'
+            )}>
               <Image
                 src={study.imageUrl}
                 alt={study.title}
                 layout="fill"
                 objectFit="cover"
-                className="transition-transform duration-500 hover:scale-105"
+                className="transition-transform duration-500 ease-out group-hover:scale-110"
                 data-ai-hint={study.dataAiHint}
               />
             </div>
