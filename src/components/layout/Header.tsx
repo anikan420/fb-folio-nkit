@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const navItems = [
   { name: 'Work', href: '/#case-studies', isHomePageAnchor: true },
@@ -84,9 +85,10 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border/20' : 'bg-transparent' // Glassmorphism for scrolled state
-      }`}
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border/20' : 'bg-transparent' 
+      )}
     >
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
@@ -104,7 +106,7 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-3 lg:space-x-4">
           {navItems.map((item) => renderNavLink(item))}
-          <Button asChild variant="default" size="sm" className="rounded-full shadow-sm hover:shadow-md transition-shadow">
+          <Button asChild variant="default" size="sm" className="rounded-full shadow-sm hover:shadow-md transition-shadow bg-background text-foreground hover:bg-background/90">
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
               Resume <ExternalLinkIcon className="ml-1.5 h-4 w-4" />
             </a>
@@ -120,7 +122,7 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] p-6 flex flex-col"> {/* SheetContent class will be updated in ui/sheet.tsx */}
+            <SheetContent side="right" className="w-[280px] p-6 flex flex-col bg-background/80 backdrop-blur-xl border-border/30">
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
@@ -138,7 +140,7 @@ export function Header() {
                 {navItems.map((item) => renderNavLink(item, true))}
               </nav>
               <div className="mt-auto pt-6">
-                <Button asChild variant="default" size="lg" className="w-full rounded-full shadow-sm hover:shadow-md transition-shadow">
+                <Button asChild variant="default" size="lg" className="w-full rounded-full shadow-sm hover:shadow-md transition-shadow bg-background text-foreground hover:bg-background/90">
                   <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" onClick={handleLinkClick}>
                     Resume <ExternalLinkIcon className="ml-1.5 h-4 w-4" />
                   </a>
