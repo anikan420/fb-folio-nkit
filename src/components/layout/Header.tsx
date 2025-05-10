@@ -95,12 +95,12 @@ export function Header() {
           <Image
             src="/logo.png"
             alt="Ankit Bansod Logo"
-            width={28} // Reduced from 32
-            height={28} // Reduced from 32
+            width={28} 
+            height={28} 
             className="rounded-md"
             data-ai-hint="geometric logo"
+            priority // Added priority
           />
-          {/* Removed Ankit Bansod text */}
         </Link>
 
         {/* Desktop Navigation */}
@@ -128,12 +128,12 @@ export function Header() {
                    <Image
                     src="/logo.png"
                     alt="Ankit Bansod Logo"
-                    width={28} // Reduced from 32
-                    height={28} // Reduced from 32
+                    width={28} 
+                    height={28} 
                     className="rounded-md"
                     data-ai-hint="geometric logo"
+                    priority // Added priority
                   />
-                   {/* Removed Ankit Bansod text */}
                 </Link>
               </div>
               <nav className="flex flex-col space-y-3">
