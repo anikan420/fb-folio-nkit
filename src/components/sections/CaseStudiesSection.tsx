@@ -37,25 +37,10 @@ export function CaseStudiesSection() {
             >
               <div 
                 className={cn(
-                  "group relative transition-all duration-300 ease-out", // Removed hover:-translate-y-2 to prevent conflict with potential future rotations
+                  "group relative transition-all duration-300 ease-out",
                 )}
               >
-                {/* Gradient Shadow on Hover (outer glow) - Kept for subtle depth */}
-                <div
-                  className="absolute -inset-1.5 -z-20 rounded-3xl 
-                             bg-gradient-to-r from-red-400/40 via-orange-400/40 to-green-400/40 
-                             opacity-0 group-hover:opacity-40 blur-xl 
-                             transition-all duration-300 ease-out"
-                  style={{ pointerEvents: 'none' }}
-                />
-                {/* Gradient Border on Hover */}
-                <div
-                  className="absolute -inset-px -z-10 rounded-2xl
-                             bg-gradient-to-r from-red-400 via-orange-400 to-green-400
-                             opacity-0 transition-opacity duration-300 ease-out
-                             group-hover:opacity-100"
-                   style={{ pointerEvents: 'none' }}
-                />
+                {/* Gradient effects removed as per user request for cleaner cards */}
                 
                 <div
                   className={cn(
@@ -133,3 +118,4 @@ export function CaseStudiesSection() {
     </SectionWrapper>
   );
 }
+
