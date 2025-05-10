@@ -50,8 +50,7 @@ export function CaseStudiesSection() {
                   <div // This is the styled card (grid, background, border, etc.)
                     className={cn(
                       "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 rounded-2xl shadow-2xl overflow-hidden border border-border/20",
-                      "bg-card", // Base card background for glassmorphism
-                      "group-hover:bg-background/60 group-hover:backdrop-blur-lg", // Enhanced glass effect on hover
+                      "bg-card/50 backdrop-blur-lg", // Glassmorphism effect: semi-transparent card background with blur
                       "transition-all duration-300 ease-out",
                       // Animated border on hover
                       "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent before:group-hover:bg-[linear-gradient(135deg,theme(colors.primary/0.4),theme(colors.orange.500/0.4),theme(colors.green.500/0.4))] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 before:group-hover:opacity-100 before:transition-opacity before:duration-500"
