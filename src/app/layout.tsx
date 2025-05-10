@@ -1,12 +1,13 @@
 
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Poppins, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const poppins = Poppins({
+  variable: '--font-poppins',
   subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], // Include a range of weights
 });
 
 const geistMono = Geist_Mono({
@@ -25,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" className="dark scroll-smooth"> {/* Added 'dark' class */}
+      <body className={`${poppins.variable} ${geistMono.variable} font-sans antialiased`}> {/* Used poppins variable and added font-sans */}
         {children}
         <Toaster />
       </body>

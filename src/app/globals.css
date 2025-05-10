@@ -51,20 +51,20 @@
   }
 
   .dark {
-    --background: 224 71.4% 4.1%; /* Dark Blue */
-    --foreground: 210 20% 98%; /* Almost White */
+    --background: 0 0% 3%; /* Near Black */
+    --foreground: 0 0% 98%; /* Almost White */
 
-    --card: 224 71.4% 6.1%; /* Slightly Lighter Dark Blue */
-    --card-foreground: 210 20% 98%;
+    --card: 224 71.4% 6.1%; /* Slightly Lighter Dark Blue - for glassmorphism base */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%; /* Darker blue - for glassmorphism base */
+    --popover-foreground: 0 0% 98%;
 
     --primary: 180 70% 40%; /* Brighter Teal for Dark Mode */
     --primary-foreground: 0 0% 100%; /* White */
 
     --secondary: 220 14.3% 11.8%; /* Darker Gray */
-    --secondary-foreground: 210 20% 98%;
+    --secondary-foreground: 0 0% 98%;
 
     --muted: 220 14.3% 11.8%;
     --muted-foreground: 220 8.9% 50%; /* Lighter Muted Text for Dark */
@@ -75,8 +75,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 14.3% 15.8%; /* Darker Border */
-    --input: 220 14.3% 15.8%; /* Darker Input Border */
+    --border: 220 14.3% 20%; /* Adjusted border for better visibility on dark bg */
+    --input: 220 14.3% 20%; /* Adjusted input border */
     --ring: 180 70% 40%; /* Brighter Teal Ring */
     
     --sidebar-background: 240 5.9% 10%;
@@ -95,11 +95,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
-    /* Subtle gradients for glassmorphism */
-    background-image: radial-gradient(ellipse at top left, hsla(var(--primary)/0.05), transparent 50%),
-                      radial-gradient(ellipse at bottom right, hsla(var(--accent)/0.05), transparent 50%);
-    background-attachment: fixed; /* Keep gradients fixed during scroll */
+    @apply bg-background text-foreground font-sans; /* Ensure font-sans is applied */
+    /* Thin grid lines */
+    background-image: linear-gradient(to right, hsla(var(--foreground) / 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, hsla(var(--foreground) / 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; /* Adjust size of grid squares as needed */
+    background-attachment: fixed; /* Keep grid fixed during scroll */
   }
   html {
     scroll-behavior: smooth;
