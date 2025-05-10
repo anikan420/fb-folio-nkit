@@ -3,7 +3,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { AboutSection } from '@/components/sections/AboutSection';
-import { ContactSection } from '@/components/sections/ContactSection';
+import { CaseStudiesSection } from '@/components/sections/CaseStudiesSection';
 
 export default function HomePage() {
   return (
@@ -12,7 +12,7 @@ export default function HomePage() {
       <main className="flex-grow">
         <HeroSection />
         <AboutSection />
-        <ContactSection />
+        <CaseStudiesSection />
       </main>
       <Footer />
     </div>

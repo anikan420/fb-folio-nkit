@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 
 const navItems = [
   { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Case Studies', href: '#case-studies' },
 ];
 
 export function Header() {
@@ -24,6 +24,10 @@ export function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header
@@ -56,7 +60,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-background p-6">
               <div className="flex flex-col space-y-6">
-                <Link href="/" className="text-2xl font-bold text-primary self-start" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/" className="text-2xl font-bold text-primary self-start" onClick={handleLinkClick}>
                   DeepWork
                 </Link>
                 {navItems.map((item) => (
@@ -64,7 +68,7 @@ export function Header() {
                     key={item.name}
                     href={item.href}
                     className="text-lg text-foreground/80 hover:text-primary transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={handleLinkClick}
                   >
                     {item.name}
                   </SmoothScrollLink>
