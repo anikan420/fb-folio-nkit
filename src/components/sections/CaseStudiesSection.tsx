@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies'; // Updated import
+import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies'; 
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 
 
@@ -39,7 +39,6 @@ export function CaseStudiesSection() {
                            opacity-0 group-hover:opacity-40 blur-xl 
                            transition-all duration-300 ease-out"
                 style={{
-                  // Ensure this div doesn't intercept pointer events if it overlays content
                   pointerEvents: 'none',
                 }}
               />

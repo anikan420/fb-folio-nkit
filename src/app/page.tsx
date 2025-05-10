@@ -2,7 +2,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { AboutSection } from '@/components/sections/AboutSection';
 import { CaseStudiesSection } from '@/components/sections/CaseStudiesSection';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 
@@ -15,11 +14,7 @@ export default function HomePage() {
           <HeroSection />
         </ScrollRevealWrapper>
         
-        <ScrollRevealWrapper delay={100}>
-          <AboutSection />
-        </ScrollRevealWrapper>
-        
-        <ScrollRevealWrapper delay={200}>
+        <ScrollRevealWrapper delay={100}> {/* Adjusted delay as AboutSection is removed */}
           <CaseStudiesSection />
         </ScrollRevealWrapper>
       </main>

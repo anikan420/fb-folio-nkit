@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation';
 
 const navItems = [
   { name: 'Work', href: '/#case-studies', isHomePageAnchor: true },
-  { name: 'About', href: '/about' },
+  { name: 'About', href: '/about' }, // Updated: No longer an anchor, points to /about page
   { name: 'Contact', href: '/#contact', isHomePageAnchor: true }, 
 ];
 
@@ -36,7 +36,7 @@ export function Header() {
 
   const renderNavLink = (item: typeof navItems[0], isMobile: boolean = false) => {
     const commonClasses = isMobile 
-      ? "px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted"
+      ? "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted"
       : "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors";
 
     if (item.isHomePageAnchor) {
