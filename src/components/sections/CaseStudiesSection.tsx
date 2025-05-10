@@ -51,7 +51,7 @@ export function CaseStudiesSection() {
                 >
                   <div // This is the styled card (grid, background, border, etc.)
                     className={cn(
-                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-8 md:p-12 rounded-2xl shadow-2xl overflow-hidden", // Padding increased
+                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-16 md:p-24 rounded-2xl shadow-2xl overflow-hidden", // Padding increased significantly
                       "bg-card", // Solid card background from globals.css
                       "border border-border/10", // Subtle resting border
                       "transition-all duration-300 ease-out",
