@@ -1,6 +1,9 @@
 // src/components/sections/HeroSection.tsx
+"use client";
+
 import { SmoothScrollLink } from '@/components/SmoothScrollLink';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 const SparkleIcon = ({ className }: { className?: string }) => (
   <svg
@@ -49,6 +52,58 @@ const CurvedArrowIcon = ({ className }: { className?: string }) => (
 
 
 export function HeroSection() {
+  const [displayText, setDisplayText] = useState('');
+  const fullTextLines = [
+    "Making sense of",
+    "messy problems,",
+    "one pixel at a time."
+  ];
+  const fullText = fullTextLines.join(" "); // For char-by-char animation
+  const typingSpeed = 50; // Milliseconds per character
+  const lineBreakDelay = 500; // Milliseconds to pause after a line
+
+  useEffect(() => {
+    let currentText = '';
+    let charIndex = 0;
+    let lineIndex = 0;
+    let timeoutId: NodeJS.Timeout;
+
+    const type = () => {
+      if (lineIndex < fullTextLines.length) {
+        const currentLine = fullTextLines[lineIndex];
+        if (charIndex < currentLine.length) {
+          currentText += currentLine[charIndex];
+          setDisplayText(currentText);
+          charIndex++;
+          timeoutId = setTimeout(type, typingSpeed);
+        } else { // End of current line
+          lineIndex++;
+          charIndex = 0;
+          if (lineIndex < fullTextLines.length) { // If there are more lines
+            currentText += ' '; // Add space for md:hidden break, or prepare for next line
+            setDisplayText(currentText); 
+            timeoutId = setTimeout(() => {
+              // Add the line break for small screens before starting next line
+              // For larger screens, the <br /> tags handle the break.
+              // We manage 'currentText' to include line breaks for the effect.
+              if (lineIndex === 1 && typeof window !== 'undefined' && window.innerWidth < 768) {
+                 // currentText += '\n'; // This won't render as a line break in HTML directly
+              } else if (lineIndex === 2 && typeof window !== 'undefined' && window.innerWidth >=768) {
+                 // currentText += '\n';
+              }
+              type();
+            }, lineBreakDelay);
+          }
+        }
+      }
+    };
+
+    timeoutId = setTimeout(type, typingSpeed);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+
   return (
     <section 
       id="hero" 
@@ -65,8 +120,23 @@ export function HeroSection() {
           </div>
         </div>
         
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground">
-          Making sense of <br className="md:hidden"/> messy problems, <br className="hidden md:block"/> one <br className="md:hidden"/> pixel at a time.
+        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px]">
+          {displayText.split(" ").map((word, wordIndex, wordsArray) => {
+            const isMessyProblems = word === "messy" && wordsArray[wordIndex+1] === "problems,";
+            const isOnePixel = word === "one" && wordsArray[wordIndex+1] === "pixel";
+            
+            return (
+              <span key={wordIndex}>
+                {word}
+                {wordIndex < wordsArray.length - 1 && ' '}
+                {isMessyProblems && <br className="md:hidden"/>}
+                {isOnePixel && <br className="md:hidden"/>}
+                {word === "problems," && <br className="hidden md:block"/>}
+              </span>
+            );
+          })}
+          <span className="animate-ping">_</span>
+
         </h1>
         
         {/* Profile Card and Arrow */}
@@ -117,4 +187,3 @@ export function HeroSection() {
     </section>
   );
 }
-
