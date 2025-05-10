@@ -49,27 +49,30 @@ export function HeroSection() {
   useEffect(() => {
     let currentText = '';
     let charIndex = 0;
-    let lineIndex = 0;
+    let lineIndexInEffect = 0; // Renamed to avoid confusion with lineIndex in map
     let isMounted = true; 
     let timeoutId: NodeJS.Timeout;
   
     const type = () => {
       if (!isMounted) return;
 
-      if (lineIndex < fullTextLines.length) {
-        const currentLine = fullTextLines[lineIndex];
+      if (lineIndexInEffect < fullTextLines.length) {
+        const currentLine = fullTextLines[lineIndexInEffect];
         if (charIndex < currentLine.length) {
           currentText += currentLine[charIndex];
           setDisplayText(currentText);
           charIndex++;
           timeoutId = setTimeout(type, typingSpeed);
         } else { 
-          lineIndex++;
+          lineIndexInEffect++;
           charIndex = 0;
-          if (lineIndex < fullTextLines.length) { 
-            currentText += ' '; 
+          if (lineIndexInEffect < fullTextLines.length) { 
+            currentText += ' '; // Add space between lines for displayText
             setDisplayText(currentText); 
             timeoutId = setTimeout(type, lineBreakDelay);
+          } else {
+            // Typing finished for all lines
+            setDisplayText(currentText); // Ensure final state is set
           }
         }
       }
@@ -82,7 +85,7 @@ export function HeroSection() {
       clearTimeout(timeoutId);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty dependency array to run only once on mount
+  }, []); 
 
 
   return (
@@ -95,41 +98,45 @@ export function HeroSection() {
       }}
     >
       <div className="container mx-auto flex max-w-4xl flex-col items-center px-4 py-20 z-10">
-        {/* Removed the "UX Designer" badge and "Made with Framer" / "Hi, I'm Ankit" cards */}
         
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px]">
-          {displayText.split(" ").map((word, wordIndex, wordsArray) => {
-             // Determine if a line break is needed based on the original fullTextLines structure
-            let needsBreakAfter = false;
-            if (lineIndex < fullTextLines.length -1) { // Check if not the last line
-                const currentDisplayLine = displayText.substring(0, displayText.lastIndexOf(fullTextLines[lineIndex].slice(-1)) +1);
-                if (fullTextLines[lineIndex] === currentDisplayLine.trim().split(" ").slice(-fullTextLines[lineIndex].split(" ").length).join(" ") && word === fullTextLines[lineIndex].split(" ").pop()) {
-                     needsBreakAfter = true;
-                }
+          {displayText.split(" ").map((word, wordIndex) => {
+            // Calculate which line of fullTextLines is currently represented by displayText's progress
+            let lineIndex = 0;
+            let accumulatedLength = 0;
+            for (let i = 0; i < fullTextLines.length; i++) {
+              accumulatedLength += fullTextLines[i].length;
+              if (i > 0) accumulatedLength += 1; // Account for space added between lines in displayText
+
+              if (displayText.length <= accumulatedLength) {
+                lineIndex = i;
+                break;
+              }
+              // If displayText has completed all lines, lineIndex should be the last line index
+              if (i === fullTextLines.length - 1 && displayText.length > accumulatedLength) {
+                lineIndex = i;
+              }
             }
             
-            let lineIndex = 0;
-            let tempLength = 0;
-            for(let i=0; i < fullTextLines.length; i++){
-                tempLength += fullTextLines[i].length + (i > 0 ? 1 : 0); // +1 for space between lines
-                if(displayText.length <= tempLength) {
-                    lineIndex = i;
-                    break;
-                }
-            }
-
-            const isEndOfLineWord = word === fullTextLines[lineIndex]?.split(" ").pop() && displayText.endsWith(word);
-            const isNotLastLine = lineIndex < fullTextLines.length - 1;
-
+            const currentLineWords = fullTextLines[lineIndex]?.split(" ") || [];
+            const isLastWordOfItsLine = word === currentLineWords[currentLineWords.length - 1];
+            
+            // A line break occurs if this word is the last word of its original line,
+            // the typewriter has just finished typing this word,
+            // and it's not the last line overall.
+            const isEndOfTypedWord = displayText.endsWith(word);
+            const shouldBreakLine = isLastWordOfItsLine && isEndOfTypedWord;
+            const isNotOverallLastLine = lineIndex < fullTextLines.length - 1;
 
             return (
               <span key={wordIndex}>
                 {word}
-                {wordIndex < displayText.split(" ").length - 1 && ' '}
-                {isEndOfLineWord && isNotLastLine && <br />}
+                {wordIndex < displayText.split(" ").length - 1 && ' '} 
+                {shouldBreakLine && isNotOverallLastLine && <br />}
               </span>
             );
           })}
+           {/* Blinking cursor logic */}
            {displayText.length < fullTextLines.join(" ").length && <span className="animate-ping">_</span>}
         </h1>
       </div>
