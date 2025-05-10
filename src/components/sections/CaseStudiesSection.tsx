@@ -89,7 +89,7 @@ export function CaseStudiesSection() {
                           >
                             <span className="group-hover:underline inline-flex items-center text-base"> 
                               Read case study
-                              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-rotate-45" />
+                              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-rotate-45" />
                             </span>
                           </Button>
                         </div>
@@ -133,4 +133,3 @@ export function CaseStudiesSection() {
     </>
   );
 }
-
