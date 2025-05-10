@@ -59,7 +59,7 @@ export function CaseStudiesSection() {
                 
                 <div
                   className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center p-6 md:p-8 bg-card rounded-2xl shadow-xl overflow-hidden"
+                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-card rounded-2xl shadow-xl overflow-hidden" // Changed items-center to items-stretch
                   )}
                 >
                   <ScrollRevealWrapper
@@ -67,8 +67,8 @@ export function CaseStudiesSection() {
                     slideDirection={isTextOnLeft ? 'left' : 'right'}
                     slideOffset="10"
                     className={cn(
-                      `flex flex-col justify-center`,
-                      !isTextOnLeft ? 'md:col-start-2' : ''
+                      `flex flex-col justify-center h-full`, // Added h-full
+                      isTextOnLeft ? 'md:col-start-1 md:row-start-1' : 'md:col-start-2 md:row-start-1'
                     )}
                   >
                     <div className={cn(
@@ -101,12 +101,13 @@ export function CaseStudiesSection() {
                     slideDirection={isTextOnLeft ? 'right' : 'left'}
                     slideOffset="10"
                     className={cn(
-                      `relative h-80 md:h-[450px] w-full overflow-hidden rounded-xl shadow-lg`,
-                      !isTextOnLeft ? 'md:col-start-1' : ''
+                      `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full`, // Removed fixed height, added flex, justify-center, h-full
+                      isTextOnLeft ? 'md:col-start-2 md:row-start-1' : 'md:col-start-1 md:row-start-1'
                     )}
                   >
-                    <div className={cn(
-                        `h-full w-full transition-transform duration-300 ease-out`,
+                    <div className={cn( // This div now defines the image's visible box
+                        `relative h-80 md:h-[450px] w-full`, // Added relative and fixed heights here
+                        `transition-transform duration-300 ease-out`,
                         "group-hover:scale-105",
                         !isTextOnLeft 
                           ? 'group-hover:md:-translate-x-1'
@@ -117,7 +118,7 @@ export function CaseStudiesSection() {
                         alt={study.title}
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-500 ease-out group-hover:scale-110"
+                        className="transition-transform duration-500 ease-out group-hover:scale-110" // group-hover:scale-110 was on image, maybe should be on parent for better effect with overflow hidden
                         data-ai-hint={study.dataAiHint}
                         priority={index < 2} // Prioritize first couple of images for LCP
                       />
