@@ -40,10 +40,10 @@ export function CaseStudiesSection() {
                   "group relative transition-all duration-300 ease-out hover:-translate-y-2",
                 )}
               >
-                {/* Gradient Shadow on Hover */}
+                {/* Gradient Shadow on Hover (outer glow) */}
                 <div
                   className="absolute -inset-1.5 -z-20 rounded-3xl 
-                             bg-gradient-to-r from-red-400 via-orange-400 to-green-400 
+                             bg-gradient-to-r from-red-400/40 via-orange-400/40 to-green-400/40 
                              opacity-0 group-hover:opacity-40 blur-xl 
                              transition-all duration-300 ease-out"
                   style={{ pointerEvents: 'none' }}
@@ -59,7 +59,7 @@ export function CaseStudiesSection() {
                 
                 <div
                   className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-card/[.15] backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden" 
+                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-foreground/5 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden" 
                   )}
                 >
                   <ScrollRevealWrapper
@@ -133,4 +133,3 @@ export function CaseStudiesSection() {
     </SectionWrapper>
   );
 }
-
