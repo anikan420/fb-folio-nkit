@@ -12,7 +12,11 @@ import { Button } from '@/components/ui/button';
 export function CaseStudiesSection() {
   return (
     <> {/* Fragment to hold multiple top-level sections */}
-      <SectionWrapper id="case-studies" className="bg-transparent pt-16 md:pt-24 pb-8 md:pb-12">
+      <SectionWrapper 
+        id="case-studies" 
+        className="bg-transparent pt-16 md:pt-24 pb-8 md:pb-12"
+        containerClassName="max-w-7xl sm:px-6 lg:px-8" // Align title with header
+      >
         <div className="text-left mb-8 md:mb-12">
           <ScrollRevealWrapper delay={0} slideDirection="up" slideOffset="4">
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground font-sans">
@@ -27,8 +31,8 @@ export function CaseStudiesSection() {
         </div>
       </SectionWrapper>
 
-      {/* Container for the full-page cards */}
-      <div>
+      {/* Container for the full-page cards, aligned with header */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {caseStudiesData.map((study, index) => {
           const isTextOnLeft = index % 2 === 0;
           return (
@@ -44,7 +48,7 @@ export function CaseStudiesSection() {
                   slideDirection="up"
                   slideOffset="10"
                 >
-                  <div // This is the card visual container (group for hover effects is now on Link parent)
+                  <div // This is the card visual container
                     className={cn(
                       "relative transition-all duration-300 ease-out",
                     )}
@@ -54,8 +58,8 @@ export function CaseStudiesSection() {
                         "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden", 
                         "bg-card/60 backdrop-blur-lg", // Glassmorphism: --card color with 60% opacity and blur
                         "border border-border/10", 
-                        "transition-all duration-300 ease-out",
-                        "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.5)_0%,hsl(var(--chart-4)/0.5)_50%,hsl(var(--chart-2)/0.5)_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
+                        "transition-all duration-300 ease-out"
+                        // Removed hover gradient border: "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.5)_0%,hsl(var(--chart-4)/0.5)_50%,hsl(var(--chart-2)/0.5)_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                       )}
                     >
                       {/* Text content block */}
@@ -133,4 +137,3 @@ export function CaseStudiesSection() {
     </>
   );
 }
-
