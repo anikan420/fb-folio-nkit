@@ -88,7 +88,7 @@ export function CaseStudiesSection() {
                             size="lg"
                             className="text-primary hover:text-primary/90 p-0 self-start"
                           >
-                            <span className="group-hover:underline inline-flex items-center font-medium text-base">
+                            <span className="group-hover:underline inline-flex items-center font-semibold text-base">
                               Read case study
                               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/link:translate-x-1" />
                             </span>
@@ -134,4 +134,3 @@ export function CaseStudiesSection() {
     </>
   );
 }
-
