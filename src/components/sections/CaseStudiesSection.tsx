@@ -36,7 +36,7 @@ export function CaseStudiesSection() {
               key={study.id}
               className="min-h-screen flex items-center justify-center py-12 md:py-20" // Each card is a full-height section
             >
-              <Link href={`/case-studies/${study.id}`} passHref className="block w-full max-w-6xl mx-auto px-4 group" aria-label={`View case study for ${study.title}`}>
+              <Link href={`/case-studies/${study.id}`} passHref className="block w-full group" aria-label={`View case study for ${study.title}`}>
                 <ScrollRevealWrapper
                   threshold={0.25} // When 25% of the card section is visible
                   once={true}
@@ -85,9 +85,9 @@ export function CaseStudiesSection() {
                             asChild
                             variant="link"
                             size="lg"
-                            className="text-primary hover:text-primary/90 p-0 self-start font-semibold" 
+                            className="text-primary hover:text-primary/90 p-0 self-start font-semibold group-hover:underline"
                           >
-                            <span className="group-hover:underline inline-flex items-center text-base"> 
+                            <span className="inline-flex items-center text-base gap-2"> 
                               Read case study
                               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-rotate-45" />
                             </span>
@@ -133,3 +133,4 @@ export function CaseStudiesSection() {
     </>
   );
 }
+
