@@ -10,7 +10,7 @@ import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper'
 
 export function CaseStudiesSection() {
   return (
-    <SectionWrapper id="case-studies" className="bg-background">
+    <SectionWrapper id="case-studies" className="bg-transparent"> {/* Ensure section wrapper doesn't hide body background */}
       <div className="text-left mb-12 md:mb-16">
          <ScrollRevealWrapper delay={0} slideDirection="up" slideOffset="4">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground font-sans">
@@ -37,7 +37,7 @@ export function CaseStudiesSection() {
             >
               <div 
                 className={cn(
-                  "group relative transition-all duration-300 ease-out hover:-translate-y-2 hover:rotate-[-1deg]",
+                  "group relative transition-all duration-300 ease-out hover:-translate-y-2", // Removed hover:rotate-[-1deg]
                 )}
               >
                 {/* Gradient Shadow on Hover */}
@@ -59,7 +59,7 @@ export function CaseStudiesSection() {
                 
                 <div
                   className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-card rounded-2xl shadow-xl overflow-hidden" // Changed items-center to items-stretch
+                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-card/[.15] backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden" // Applied glassmorphism: bg-card/[.15] backdrop-blur-lg, increased shadow
                   )}
                 >
                   <ScrollRevealWrapper
@@ -67,7 +67,7 @@ export function CaseStudiesSection() {
                     slideDirection={isTextOnLeft ? 'left' : 'right'}
                     slideOffset="10"
                     className={cn(
-                      `flex flex-col justify-center h-full`, // Added h-full
+                      `flex flex-col justify-center h-full`, 
                       isTextOnLeft ? 'md:col-start-1 md:row-start-1' : 'md:col-start-2 md:row-start-1'
                     )}
                   >
@@ -101,12 +101,12 @@ export function CaseStudiesSection() {
                     slideDirection={isTextOnLeft ? 'right' : 'left'}
                     slideOffset="10"
                     className={cn(
-                      `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full`, // Removed fixed height, added flex, justify-center, h-full
+                      `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full`, 
                       isTextOnLeft ? 'md:col-start-2 md:row-start-1' : 'md:col-start-1 md:row-start-1'
                     )}
                   >
-                    <div className={cn( // This div now defines the image's visible box
-                        `relative h-80 md:h-[450px] w-full`, // Added relative and fixed heights here
+                    <div className={cn( 
+                        `relative h-80 md:h-[450px] w-full`, 
                         `transition-transform duration-300 ease-out`,
                         "group-hover:scale-105",
                         !isTextOnLeft 
@@ -118,9 +118,9 @@ export function CaseStudiesSection() {
                         alt={study.title}
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-500 ease-out group-hover:scale-110" // group-hover:scale-110 was on image, maybe should be on parent for better effect with overflow hidden
+                        className="transition-transform duration-500 ease-out group-hover:scale-110" 
                         data-ai-hint={study.dataAiHint}
-                        priority={index < 2} // Prioritize first couple of images for LCP
+                        priority={index < 2} 
                       />
                     </div>
                   </ScrollRevealWrapper>

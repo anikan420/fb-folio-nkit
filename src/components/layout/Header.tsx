@@ -36,7 +36,7 @@ export function Header() {
 
   const renderNavLink = (item: typeof navItems[0], isMobile: boolean = false) => {
     const baseClasses = "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors";
-    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted";
+    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted/50"; // Ensure hover on mobile is also somewhat transparent if muted is glass
     const commonClasses = isMobile ? mobileClasses : `${baseClasses} group relative`;
 
 
@@ -85,7 +85,7 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/80 shadow-sm backdrop-blur-md' : 'bg-transparent'
+        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border/20' : 'bg-transparent' // Glassmorphism for scrolled state
       }`}
     >
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -120,7 +120,7 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] bg-background p-6 flex flex-col">
+            <SheetContent side="right" className="w-[280px] p-6 flex flex-col"> {/* SheetContent class will be updated in ui/sheet.tsx */}
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image

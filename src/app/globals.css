@@ -96,6 +96,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Subtle gradients for glassmorphism */
+    background-image: radial-gradient(ellipse at top left, hsla(var(--primary)/0.05), transparent 50%),
+                      radial-gradient(ellipse at bottom right, hsla(var(--accent)/0.05), transparent 50%);
+    background-attachment: fixed; /* Keep gradients fixed during scroll */
   }
   html {
     scroll-behavior: smooth;

@@ -20,9 +20,9 @@ export default function AboutPage() {
           <AboutSection />
         </ScrollRevealWrapper>
         {/* You can add more sections to the About page here, wrapped in ScrollRevealWrapper */}
-        <SectionWrapper className="bg-muted">
+        <SectionWrapper className="bg-muted/30 backdrop-blur-lg border border-border/10 shadow-lg rounded-xl my-8"> {/* Glassmorphism for muted section */}
            <ScrollRevealWrapper>
-            <div className="text-center">
+            <div className="text-center py-8 md:py-12"> {/* Added padding inside the glassmorphic section */}
                 <h2 className="text-3xl font-bold tracking-tight md:text-4xl mb-6">My Philosophy</h2>
                 <p className="text-lg text-foreground/80 max-w-3xl mx-auto mb-4">
                     I believe in crafting digital experiences that are not only functional and performant but also delightful to use. My approach is rooted in user-centric design principles, continuous learning, and a passion for solving complex problems with elegant solutions.
@@ -38,5 +38,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-    
