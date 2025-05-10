@@ -7,7 +7,7 @@ import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper'
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-transparent"> {/* Changed bg-background to bg-transparent */}
       <Header />
       <main className="flex-grow">
         <ScrollRevealWrapper threshold={0.01} once={false}> {/* Hero might need different threshold/once */}

@@ -4,52 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 3%; /* Near Black */
-    --foreground: 0 0% 98%; /* Almost White */
-
-    --card: 260 25% 18%; /* Dark Muted Purple - for case study cards and other card elements */
-    --card-foreground: 0 0% 98%;
-
-    --popover: 224 71.4% 8%; /* Slightly Lighter Darker blue for glass base (was 4.1%) */
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 180 70% 40%; /* Brighter Teal for Dark Mode */
-    --primary-foreground: 0 0% 100%; /* White */
-
-    --secondary: 220 14.3% 15%; /* Slightly Lighter Darker Gray (was 11.8%) */
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 220 14.3% 15%; /* Slightly Lighter Darker Gray (was 11.8%) */
-    --muted-foreground: 220 8.9% 50%; /* Lighter Muted Text for Dark */
-
-    --accent: 180 70% 40%; /* Brighter Teal */
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 220 14.3% 25%; /* Adjusted border for better visibility on dark bg (was 20%) */
-    --input: 220 14.3% 25%; /* Adjusted input border (was 20%) */
-    --ring: 180 70% 40%; /* Brighter Teal Ring */
-
-    --chart-1: 12 76% 61%; /* Orange-Red */
-    --chart-2: 173 58% 39%; /* Green */
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%; /* Yellow-Orange */
-    --chart-5: 27 87% 67%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 0 0% 3%; /* Near Black */
+    --background: 0 0% 3%; /* Near Black - Used for opaque backgrounds if needed, or as a base for semi-transparent elements */
     --foreground: 0 0% 98%; /* Almost White */
 
     --card: 260 25% 18%; /* Dark Muted Purple - for case study cards and other card elements */
@@ -76,6 +31,51 @@
     --border: 220 14.3% 25%; /* Adjusted border for better visibility on dark bg */
     --input: 220 14.3% 25%; /* Adjusted input border */
     --ring: 180 70% 40%; /* Brighter Teal Ring */
+
+    --chart-1: 12 76% 61%; /* Orange-Red */
+    --chart-2: 173 58% 39%; /* Green */
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%; /* Yellow-Orange */
+    --chart-5: 27 87% 67%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 3%; 
+    --foreground: 0 0% 98%; 
+
+    --card: 260 25% 18%; 
+    --card-foreground: 0 0% 98%;
+
+    --popover: 224 71.4% 8%; 
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 180 70% 40%; 
+    --primary-foreground: 0 0% 100%; 
+
+    --secondary: 220 14.3% 15%; 
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 220 14.3% 15%; 
+    --muted-foreground: 220 8.9% 50%; 
+
+    --accent: 180 70% 40%; 
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 14.3% 25%; 
+    --input: 220 14.3% 25%; 
+    --ring: 180 70% 40%; 
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -94,21 +94,18 @@
   }
   body {
     @apply text-foreground font-sans;
-    background-color: hsl(230, 25%, 15%); /* Fallback dark color */
-    /* Gradient background pattern matching the provided image */
-    background-image: linear-gradient(135deg, hsl(185, 80%, 50%), hsl(230, 25%, 15%) 50%, hsl(325, 80%, 55%));
+    background-image: url('https://cdn.midjourney.com/120b75b1-f94e-4f5e-80a9-71879156c9ca/0_0.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     min-height: 100vh;
-    background-attachment: fixed; /* Keep gradient fixed during scroll */
+    background-attachment: fixed; /* Keep background fixed during scroll */
   }
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* Remove grid lines from hero section if they were applied via global CSS,
-   HeroSection component now handles its own background styling directly.
-   If any global grid pattern was applied to body or other main containers,
-   ensure it's removed or overridden by the new body background-image. */
 #hero {
-  background-image: none !important; /* Ensure hero section doesn't have conflicting grid */
+  background-image: none !important; 
 }

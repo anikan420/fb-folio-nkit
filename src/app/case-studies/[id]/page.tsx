@@ -48,7 +48,7 @@ export default function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-transparent"> {/* Changed bg-background to bg-transparent */}
       <Header />
       <main className="flex-grow pt-20"> {/* Add padding top to account for fixed header */}
         <CaseStudyDetail study={study} />
