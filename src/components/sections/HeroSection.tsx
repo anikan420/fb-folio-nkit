@@ -93,10 +93,8 @@ export function HeroSection() {
     <section 
       id="hero" 
       className="relative flex min-h-screen items-center justify-center text-center overflow-hidden"
-      style={{
-        backgroundImage: 'linear-gradient(to right, hsla(var(--foreground) / 0.03) 1px, transparent 1px), linear-gradient(to bottom, hsla(var(--foreground) / 0.03) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-      }}
+      // Background styling is now primarily handled by globals.css on the body
+      // Specific patterns for hero section, if needed, can be added here but avoid conflicting with global body background
     >
       <div className="container mx-auto flex max-w-4xl flex-col items-center px-4 py-20 z-10">
         
@@ -105,37 +103,47 @@ export function HeroSection() {
             let currentLineIndex = 0;
             let accumulatedLength = 0;
             let currentWordStartPosInDisplayText = 0;
+            
+            // Find current word's start position in displayText
+            if (wordIndex === 0) {
+                currentWordStartPosInDisplayText = 0;
+            } else {
+                // Iterate through words already in displayText to find the start of the current word
+                let tempPos = 0;
+                for(let i=0; i < wordIndex; i++) {
+                    tempPos += displayText.split(" ")[i].length + 1; // +1 for space
+                }
+                currentWordStartPosInDisplayText = tempPos;
+            }
 
-            // Determine which line this word belongs to and its starting position in displayText
+
+            // Determine which line this word belongs to
+            let tempLength = 0;
             for(let i = 0; i < fullTextLines.length; i++) {
                 const line = fullTextLines[i];
-                const lineLengthWithSpace = line.length + (i < fullTextLines.length - 1 ? 1 : 0);
-                if (displayText.length > accumulatedLength && displayText.length <= accumulatedLength + lineLengthWithSpace) {
+                const lineLengthWithSpace = line.length + (i < fullTextLines.length - 1 ? 1 : 0); // Add 1 for space if not last line
+                
+                if (currentWordStartPosInDisplayText >= tempLength && currentWordStartPosInDisplayText < tempLength + lineLengthWithSpace) {
                     currentLineIndex = i;
                     break;
-                } else if (displayText.length > accumulatedLength + lineLengthWithSpace) {
-                    currentWordStartPosInDisplayText = accumulatedLength + lineLengthWithSpace;
-                    accumulatedLength += lineLengthWithSpace;
-                    currentLineIndex = i + 1 < fullTextLines.length ? i + 1 : i;
-
-                } else {
-                   currentLineIndex = i;
-                   break;
+                }
+                tempLength += lineLengthWithSpace;
+                if (i === fullTextLines.length - 1) { // Ensure last word maps to last line if logic above fails
+                    currentLineIndex = i;
                 }
             }
-             if (wordIndex > 0) {
-                currentWordStartPosInDisplayText = displayText.indexOf(` ${word}`, currentWordStartPosInDisplayText -1);
-                if(currentWordStartPosInDisplayText === -1 && wordIndex === 0) currentWordStartPosInDisplayText = 0;
-                else if (currentWordStartPosInDisplayText === -1) currentWordStartPosInDisplayText = displayText.indexOf(word, 0)
-             }
-
+             
 
             const originalLine = fullTextLines[currentLineIndex] || "";
             const wordsInOriginalLine = originalLine.split(" ");
             const isLastWordOfOriginalLine = word === wordsInOriginalLine[wordsInOriginalLine.length - 1];
             
             // Check if this word is fully typed out AND is the last word of its line in fullTextLines
-            const isEndOfThisWordInDisplayText = displayText.length >= currentWordStartPosInDisplayText + word.length;
+            // The word is fully typed if its end position in displayText is reached or passed
+            const endOfWordInDisplayText = currentWordStartPosInDisplayText + word.length;
+            const isEndOfThisWordInDisplayText = displayText.length >= endOfWordInDisplayText;
+
+
             const needsBreakAfter = isLastWordOfOriginalLine && isEndOfThisWordInDisplayText && currentLineIndex < fullTextLines.length - 1;
 
             return (
@@ -168,3 +176,4 @@ export function HeroSection() {
     </section>
   );
 }
+

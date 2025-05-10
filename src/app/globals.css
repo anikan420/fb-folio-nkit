@@ -95,12 +95,20 @@
   body {
     @apply text-foreground font-sans;
     background-color: hsl(var(--background)); /* Fallback */
-    /* iPhone-like gradient background pattern */
-    background-image: linear-gradient(135deg, hsl(220, 20%, 10%), hsl(180, 30%, 15%), hsl(260, 20%, 12%));
+    /* Gradient background pattern matching the provided image */
+    background-image: linear-gradient(165deg, hsl(205, 65%, 11%), hsl(290, 55%, 10%));
     min-height: 100vh;
     background-attachment: fixed; /* Keep gradient fixed during scroll */
   }
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Remove grid lines from hero section if they were applied via global CSS,
+   HeroSection component now handles its own background styling directly.
+   If any global grid pattern was applied to body or other main containers,
+   ensure it's removed or overridden by the new body background-image. */
+#hero {
+  background-image: none !important; /* Ensure hero section doesn't have conflicting grid */
 }
