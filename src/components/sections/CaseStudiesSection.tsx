@@ -39,7 +39,7 @@ export function CaseStudiesSection() {
               <ScrollRevealWrapper
                 threshold={0.25} // When 25% of the card section is visible
                 once={true}
-                className="w-full max-w-5xl mx-auto px-4" // Card container with max-width
+                className="w-full max-w-6xl mx-auto px-4" // Card container with max-width increased
                 delay={50} // Stagger appearance of each card section
                 slideDirection="up"
                 slideOffset="10"
@@ -51,7 +51,7 @@ export function CaseStudiesSection() {
                 >
                   <div // This is the styled card (grid, background, border, etc.)
                     className={cn(
-                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 rounded-2xl shadow-2xl overflow-hidden",
+                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-8 md:p-12 rounded-2xl shadow-2xl overflow-hidden", // Padding increased
                       "bg-card", // Solid card background from globals.css
                       "border border-border/10", // Subtle resting border
                       "transition-all duration-300 ease-out",
@@ -76,7 +76,7 @@ export function CaseStudiesSection() {
                         <Badge variant="secondary" className="mb-4 text-xs px-3 py-1 bg-primary/10 border-primary/30 text-primary">
                           {study.category}
                         </Badge>
-                        <h3 className="mb-4 text-3xl md:text-4xl font-bold text-foreground font-sans">
+                        <h3 className="mb-6 text-3xl md:text-4xl font-bold text-foreground font-sans"> {/* Margin bottom increased for title */}
                           {study.title}
                         </h3>
                         <p className="mb-6 text-lg text-foreground/80 font-sans line-clamp-3 md:line-clamp-none">
