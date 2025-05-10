@@ -37,13 +37,13 @@ export function CaseStudiesSection() {
             >
               <div 
                 className={cn(
-                  "group relative transition-all duration-300 ease-out hover:-translate-y-2", // Removed hover:rotate-[-1deg]
+                  "group relative transition-all duration-300 ease-out hover:-translate-y-2",
                 )}
               >
                 {/* Gradient Shadow on Hover */}
                 <div
                   className="absolute -inset-1.5 -z-20 rounded-3xl 
-                             bg-gradient-to-r from-red-500 via-orange-500 to-green-500 
+                             bg-gradient-to-r from-red-400 via-orange-400 to-green-400 
                              opacity-0 group-hover:opacity-40 blur-xl 
                              transition-all duration-300 ease-out"
                   style={{ pointerEvents: 'none' }}
@@ -51,7 +51,7 @@ export function CaseStudiesSection() {
                 {/* Gradient Border on Hover */}
                 <div
                   className="absolute -inset-px -z-10 rounded-2xl
-                             bg-gradient-to-r from-red-500 via-orange-500 to-green-500
+                             bg-gradient-to-r from-red-400 via-orange-400 to-green-400
                              opacity-0 transition-opacity duration-300 ease-out
                              group-hover:opacity-100"
                    style={{ pointerEvents: 'none' }}
@@ -59,7 +59,7 @@ export function CaseStudiesSection() {
                 
                 <div
                   className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-card/[.15] backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden" // Applied glassmorphism: bg-card/[.15] backdrop-blur-lg, increased shadow
+                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-card/[.15] backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden" 
                   )}
                 >
                   <ScrollRevealWrapper
@@ -133,3 +133,4 @@ export function CaseStudiesSection() {
     </SectionWrapper>
   );
 }
+
