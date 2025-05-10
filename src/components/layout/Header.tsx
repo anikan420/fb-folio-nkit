@@ -12,7 +12,7 @@ import { usePathname } from 'next/navigation';
 
 const navItems = [
   { name: 'Work', href: '/#case-studies', isHomePageAnchor: true },
-  { name: 'About', href: '/about' }, // Updated: No longer an anchor, points to /about page
+  { name: 'About', href: '/about' }, 
   { name: 'Contact', href: '/#contact', isHomePageAnchor: true }, 
 ];
 
@@ -35,37 +35,39 @@ export function Header() {
   };
 
   const renderNavLink = (item: typeof navItems[0], isMobile: boolean = false) => {
-    const commonClasses = isMobile 
-      ? "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted"
-      : "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors";
+    const baseClasses = "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors";
+    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted";
+    const commonClasses = isMobile ? mobileClasses : `${baseClasses} group relative`;
+
 
     if (item.isHomePageAnchor) {
-      if (pathname === '/') { // If on homepage, use SmoothScrollLink
+      if (pathname === '/') { 
         return (
           <SmoothScrollLink
             key={item.name}
-            href={item.href.substring(1)} // Pass #case-studies or #contact
+            href={item.href.substring(1)} 
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
             {item.name}
+            {!isMobile && <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>}
           </SmoothScrollLink>
         );
-      } else { // If not on homepage, use regular Link to navigate to homepage then scroll
+      } else { 
         return (
           <Link
             key={item.name}
-            href={item.href} // Pass /#case-studies or /#contact
+            href={item.href} 
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
             {item.name}
+            {!isMobile && <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>}
           </Link>
         );
       }
     }
 
-    // For regular page links like /about
     return (
       <Link
         key={item.name}
@@ -74,6 +76,7 @@ export function Header() {
         onClick={isMobile ? handleLinkClick : undefined}
       >
         {item.name}
+        {!isMobile && <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>}
       </Link>
     );
   };
@@ -89,12 +92,13 @@ export function Header() {
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
           <Image
             src="https://picsum.photos/seed/avatarlogo/40/40" 
-            alt="Logo"
+            alt="Logo Ankit Bansod"
             width={32}
             height={32}
             className="rounded-full"
             data-ai-hint="abstract logo"
           />
+           <span className="font-sans">Ankit Bansod</span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -121,12 +125,13 @@ export function Header() {
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
                     src="https://picsum.photos/seed/avatarlogo-mobile/40/40"
-                    alt="Logo"
+                    alt="Logo Ankit Bansod"
                     width={32}
                     height={32}
                     className="rounded-full"
                     data-ai-hint="abstract logo"
                   />
+                  <span className="font-sans">Ankit Bansod</span>
                 </Link>
               </div>
               <nav className="flex flex-col space-y-3">
@@ -146,5 +151,3 @@ export function Header() {
     </header>
   );
 }
-
-    

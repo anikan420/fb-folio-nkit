@@ -5,20 +5,27 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
+type SlideOffsetValue = '0' | 'px' | '0.5' | '1' | '1.5' | '2' | '2.5' | '3' | '3.5' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '14' | '16' | '20' | '24' | '28' | '32' | '36' | '40' | '44' | '48' | '52' | '56' | '60' | '64' | '72' | '80' | '96';
+
+
 interface ScrollRevealWrapperProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
-  delay?: number; // Optional delay in ms
+  delay?: number;
   className?: string;
-  threshold?: number; // IntersectionObserver threshold
-  once?: boolean; // Trigger animation only once
+  threshold?: number;
+  once?: boolean;
+  slideDirection?: 'left' | 'right' | 'up' | 'down';
+  slideOffset?: SlideOffsetValue; 
 }
 
 export function ScrollRevealWrapper({
   children,
   delay = 0,
   className,
-  threshold = 0.1, // Default to 10% visibility
-  once = true,     // Default to animating once
+  threshold = 0.1,
+  once = true,
+  slideDirection = 'down',
+  slideOffset = '10', // Corresponds to 2.5rem by default with Tailwind's scale
   ...props
 }: ScrollRevealWrapperProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,23 +37,19 @@ export function ScrollRevealWrapper({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Ensure we only set isVisible if the component is still mounted and entry is intersecting
         if (entry.isIntersecting) {
           const timer = setTimeout(() => {
-            // Check ref.current again inside timeout in case component unmounted
             if (ref.current) {
               setIsVisible(true);
-              if (once && ref.current) { // Check currentRef again
+              if (once && ref.current) {
                 observer.unobserve(ref.current);
               }
             }
           }, delay);
-          // Cleanup function for the timeout
           return () => clearTimeout(timer);
         } else {
-          // Optionally reset visibility if `once` is false
           if (!once) {
-             // setIsVisible(false); // Uncomment to make elements hide when they scroll out of view
+            // setIsVisible(false); // Optionally reset
           }
         }
       },
@@ -62,14 +65,33 @@ export function ScrollRevealWrapper({
         observer.unobserve(currentRef);
       }
     };
-  }, [delay, threshold, once]); // Dependencies for useEffect
+  }, [delay, threshold, once]);
+
+  let initialTransformClass = '';
+  let finalTransformClass = 'opacity-100 translate-x-0 translate-y-0'; // Common final state
+
+  switch (slideDirection) {
+    case 'left':
+      initialTransformClass = `opacity-0 -translate-x-${slideOffset}`;
+      break;
+    case 'right':
+      initialTransformClass = `opacity-0 translate-x-${slideOffset}`;
+      break;
+    case 'up':
+      initialTransformClass = `opacity-0 -translate-y-${slideOffset}`;
+      break;
+    case 'down':
+    default:
+      initialTransformClass = `opacity-0 translate-y-${slideOffset}`;
+      break;
+  }
 
   return (
     <div
       ref={ref}
       className={cn(
         'transition-all duration-700 ease-out',
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10', // Initial state: invisible and slightly down
+        isVisible ? finalTransformClass : initialTransformClass,
         className
       )}
       {...props}
@@ -78,5 +100,3 @@ export function ScrollRevealWrapper({
     </div>
   );
 }
-
-    

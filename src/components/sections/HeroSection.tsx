@@ -1,10 +1,11 @@
 // src/components/sections/HeroSection.tsx
 "use client";
 
-import Link from 'next/link'; // Import Next.js Link
+import Link from 'next/link'; 
 import { useState, useEffect } from 'react';
+import { SmoothScrollLink } from '../SmoothScrollLink';
 
-const SparkleIcon = ({ className }: { className?: string }) => (
+const SparkleIcon = ({ className, style }: { className?: string, style?: React.CSSProperties }) => (
   <svg
     width="48"
     height="48"
@@ -12,6 +13,7 @@ const SparkleIcon = ({ className }: { className?: string }) => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
+    style={style}
   >
     <path
       d="M24 0L28.8995 19.1005L48 24L28.8995 28.8995L24 48L19.1005 28.8995L0 24L19.1005 19.1005L24 0Z"
@@ -49,7 +51,7 @@ export function HeroSection() {
   useEffect(() => {
     let currentText = '';
     let charIndex = 0;
-    let lineIndexInEffect = 0; // Renamed to avoid confusion with lineIndex in map
+    let lineIndexInEffect = 0; 
     let isMounted = true; 
     let timeoutId: NodeJS.Timeout;
   
@@ -67,12 +69,11 @@ export function HeroSection() {
           lineIndexInEffect++;
           charIndex = 0;
           if (lineIndexInEffect < fullTextLines.length) { 
-            currentText += ' '; // Add space between lines for displayText
+            currentText += ' '; 
             setDisplayText(currentText); 
             timeoutId = setTimeout(type, lineBreakDelay);
           } else {
-            // Typing finished for all lines
-            setDisplayText(currentText); // Ensure final state is set
+            setDisplayText(currentText); 
           }
         }
       }
@@ -99,64 +100,71 @@ export function HeroSection() {
     >
       <div className="container mx-auto flex max-w-4xl flex-col items-center px-4 py-20 z-10">
         
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px]">
+        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px] font-sans">
           {displayText.split(" ").map((word, wordIndex) => {
-            // Calculate which line of fullTextLines is currently represented by displayText's progress
-            let lineIndex = 0;
+            let currentLineIndex = 0;
             let accumulatedLength = 0;
-            for (let i = 0; i < fullTextLines.length; i++) {
-              accumulatedLength += fullTextLines[i].length;
-              if (i > 0) accumulatedLength += 1; // Account for space added between lines in displayText
+            let currentWordStartPosInDisplayText = 0;
 
-              if (displayText.length <= accumulatedLength) {
-                lineIndex = i;
-                break;
-              }
-              // If displayText has completed all lines, lineIndex should be the last line index
-              if (i === fullTextLines.length - 1 && displayText.length > accumulatedLength) {
-                lineIndex = i;
-              }
+            // Determine which line this word belongs to and its starting position in displayText
+            for(let i = 0; i < fullTextLines.length; i++) {
+                const line = fullTextLines[i];
+                const lineLengthWithSpace = line.length + (i < fullTextLines.length - 1 ? 1 : 0);
+                if (displayText.length > accumulatedLength && displayText.length <= accumulatedLength + lineLengthWithSpace) {
+                    currentLineIndex = i;
+                    break;
+                } else if (displayText.length > accumulatedLength + lineLengthWithSpace) {
+                    currentWordStartPosInDisplayText = accumulatedLength + lineLengthWithSpace;
+                    accumulatedLength += lineLengthWithSpace;
+                    currentLineIndex = i + 1 < fullTextLines.length ? i + 1 : i;
+
+                } else {
+                   currentLineIndex = i;
+                   break;
+                }
             }
+             if (wordIndex > 0) {
+                currentWordStartPosInDisplayText = displayText.indexOf(` ${word}`, currentWordStartPosInDisplayText -1);
+                if(currentWordStartPosInDisplayText === -1 && wordIndex === 0) currentWordStartPosInDisplayText = 0;
+                else if (currentWordStartPosInDisplayText === -1) currentWordStartPosInDisplayText = displayText.indexOf(word, 0)
+             }
+
+
+            const originalLine = fullTextLines[currentLineIndex] || "";
+            const wordsInOriginalLine = originalLine.split(" ");
+            const isLastWordOfOriginalLine = word === wordsInOriginalLine[wordsInOriginalLine.length - 1];
             
-            const currentLineWords = fullTextLines[lineIndex]?.split(" ") || [];
-            const isLastWordOfItsLine = word === currentLineWords[currentLineWords.length - 1];
-            
-            // A line break occurs if this word is the last word of its original line,
-            // the typewriter has just finished typing this word,
-            // and it's not the last line overall.
-            const isEndOfTypedWord = displayText.endsWith(word);
-            const shouldBreakLine = isLastWordOfItsLine && isEndOfTypedWord;
-            const isNotOverallLastLine = lineIndex < fullTextLines.length - 1;
+            // Check if this word is fully typed out AND is the last word of its line in fullTextLines
+            const isEndOfThisWordInDisplayText = displayText.length >= currentWordStartPosInDisplayText + word.length;
+            const needsBreakAfter = isLastWordOfOriginalLine && isEndOfThisWordInDisplayText && currentLineIndex < fullTextLines.length - 1;
 
             return (
               <span key={wordIndex}>
                 {word}
                 {wordIndex < displayText.split(" ").length - 1 && ' '} 
-                {shouldBreakLine && isNotOverallLastLine && <br />}
+                {needsBreakAfter && <br />}
               </span>
             );
           })}
-           {/* Blinking cursor logic */}
            {displayText.length < fullTextLines.join(" ").length && <span className="animate-ping">_</span>}
         </h1>
       </div>
 
       {/* Decorative Sparkles */}
-      <SparkleIcon className="absolute top-[15%] left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary/80 opacity-80 transform -rotate-12" />
-      <SparkleIcon className="absolute bottom-[20%] right-[12%] w-10 h-10 md:w-14 md:h-14 text-primary/80 opacity-80 transform rotate-6" />
-      <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary/70 opacity-60 transform rotate-45 hidden md:block" />
-      <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary/70 opacity-70 transform -rotate-45 hidden md:block" />
+      <SparkleIcon className="absolute top-[15%] left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary/80 transform -rotate-12 animate-subtle-float" style={{animationDelay: '0s'}} />
+      <SparkleIcon className="absolute bottom-[20%] right-[12%] w-10 h-10 md:w-14 md:h-14 text-primary/80 transform rotate-6 animate-subtle-float" style={{animationDelay: '0.5s'}} />
+      <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary/70 transform rotate-45 hidden md:block animate-subtle-pulse" style={{animationDelay: '0.2s'}}/>
+      <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary/70 transform -rotate-45 hidden md:block animate-subtle-pulse" style={{animationDelay: '0.7s'}}/>
 
-      <Link
-        href="/about" // Changed to Next.js Link and points to /about page
+
+      <SmoothScrollLink
+        href="#case-studies" 
         className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 text-primary hover:opacity-70 z-20 animate-bounce"
-        aria-label="Go to about page"
+        aria-label="Scroll to case studies"
       >
         <FlowerScrollIcon className="h-10 w-10 text-primary" />
-      </Link>
+      </SmoothScrollLink>
       
     </section>
   );
 }
-
-    
