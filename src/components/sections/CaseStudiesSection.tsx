@@ -37,10 +37,10 @@ export function CaseStudiesSection() {
             >
               <div 
                 className={cn(
-                  "group relative transition-all duration-300 ease-out hover:-translate-y-2",
+                  "group relative transition-all duration-300 ease-out", // Removed hover:-translate-y-2 to prevent conflict with potential future rotations
                 )}
               >
-                {/* Gradient Shadow on Hover (outer glow) */}
+                {/* Gradient Shadow on Hover (outer glow) - Kept for subtle depth */}
                 <div
                   className="absolute -inset-1.5 -z-20 rounded-3xl 
                              bg-gradient-to-r from-red-400/40 via-orange-400/40 to-green-400/40 
@@ -59,7 +59,7 @@ export function CaseStudiesSection() {
                 
                 <div
                   className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-foreground/5 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden" 
+                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-background/50 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden border border-border/20" // Glassmorphism: bg-background/50, backdrop-blur-lg, border
                   )}
                 >
                   <ScrollRevealWrapper
@@ -108,7 +108,7 @@ export function CaseStudiesSection() {
                     <div className={cn( 
                         `relative h-80 md:h-[450px] w-full`, 
                         `transition-transform duration-300 ease-out`,
-                        "group-hover:scale-105",
+                        "group-hover:scale-105", // Keep image zoom on hover
                         !isTextOnLeft 
                           ? 'group-hover:md:-translate-x-1'
                           : 'group-hover:md:translate-x-1'
@@ -118,7 +118,7 @@ export function CaseStudiesSection() {
                         alt={study.title}
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-500 ease-out group-hover:scale-110" 
+                        className="transition-transform duration-500 ease-out group-hover:scale-110" // Keep inner image scale, but parent scale is removed
                         data-ai-hint={study.dataAiHint}
                         priority={index < 2} 
                       />
@@ -133,4 +133,3 @@ export function CaseStudiesSection() {
     </SectionWrapper>
   );
 }
-

@@ -7,19 +7,19 @@
     --background: 0 0% 3%; /* Near Black */
     --foreground: 0 0% 98%; /* Almost White */
 
-    --card: 224 71.4% 6.1%; /* Slightly Lighter Dark Blue - for glassmorphism base */
+    --card: 224 71.4% 10%; /* Slightly Lighter Dark Blue for glass base (was 6.1%) */
     --card-foreground: 0 0% 98%;
 
-    --popover: 224 71.4% 4.1%; /* Darker blue - for glassmorphism base */
+    --popover: 224 71.4% 8%; /* Slightly Lighter Darker blue for glass base (was 4.1%) */
     --popover-foreground: 0 0% 98%;
 
     --primary: 180 70% 40%; /* Brighter Teal for Dark Mode */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 14.3% 11.8%; /* Darker Gray */
+    --secondary: 220 14.3% 15%; /* Slightly Lighter Darker Gray (was 11.8%) */
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 14.3% 11.8%;
+    --muted: 220 14.3% 15%; /* Slightly Lighter Darker Gray (was 11.8%) */
     --muted-foreground: 220 8.9% 50%; /* Lighter Muted Text for Dark */
 
     --accent: 180 70% 40%; /* Brighter Teal */
@@ -28,8 +28,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 14.3% 20%; /* Adjusted border for better visibility on dark bg */
-    --input: 220 14.3% 20%; /* Adjusted input border */
+    --border: 220 14.3% 25%; /* Adjusted border for better visibility on dark bg (was 20%) */
+    --input: 220 14.3% 25%; /* Adjusted input border (was 20%) */
     --ring: 180 70% 40%; /* Brighter Teal Ring */
 
     --chart-1: 12 76% 61%;
@@ -52,19 +52,19 @@
     --background: 0 0% 3%; /* Near Black */
     --foreground: 0 0% 98%; /* Almost White */
 
-    --card: 224 71.4% 6.1%; /* Slightly Lighter Dark Blue - for glassmorphism base */
+    --card: 224 71.4% 10%; /* Slightly Lighter Dark Blue for glass base */
     --card-foreground: 0 0% 98%;
 
-    --popover: 224 71.4% 4.1%; /* Darker blue - for glassmorphism base */
+    --popover: 224 71.4% 8%; /* Slightly Lighter Darker blue for glass base */
     --popover-foreground: 0 0% 98%;
 
     --primary: 180 70% 40%; /* Brighter Teal for Dark Mode */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 14.3% 11.8%; /* Darker Gray */
+    --secondary: 220 14.3% 15%; /* Slightly Lighter Darker Gray */
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 14.3% 11.8%;
+    --muted: 220 14.3% 15%; /* Slightly Lighter Darker Gray */
     --muted-foreground: 220 8.9% 50%; /* Lighter Muted Text for Dark */
 
     --accent: 180 70% 40%; /* Brighter Teal */
@@ -73,8 +73,8 @@
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 14.3% 20%; /* Adjusted border for better visibility on dark bg */
-    --input: 220 14.3% 20%; /* Adjusted input border */
+    --border: 220 14.3% 25%; /* Adjusted border for better visibility on dark bg */
+    --input: 220 14.3% 25%; /* Adjusted input border */
     --ring: 180 70% 40%; /* Brighter Teal Ring */
     
     --sidebar-background: 240 5.9% 10%;
