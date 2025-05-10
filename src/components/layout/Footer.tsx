@@ -12,9 +12,9 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer id="contact" className="bg-background/30 backdrop-blur-lg border-t border-border/20 shadow-lg"> {/* Glassmorphism style */}
-      <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row">
+      <div className="container mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6 lg:px-8"> {/* Align with header */}
         <p className="text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} DeepWork. All rights reserved.
+          &copy; {new Date().getFullYear()} All rights reserved by Ankit.
         </p>
         <div className="flex space-x-4">
           {socialLinks.map((link) => (
