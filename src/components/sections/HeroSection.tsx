@@ -42,8 +42,8 @@ const CurvedArrowIcon = ({ className }: { className?: string }) => (
     xmlns="http://www.w3.org/2000/svg"
     className={className}
   >
-    <path d="M70 10C70 30 55 45 35 45C15 45 5 60 5 70" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M10 70L5 70L5 65" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M70 10C70 30 55 45 35 45C15 45 5 60 5 70" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 70L5 70L5 65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
@@ -54,35 +54,35 @@ export function HeroSection() {
       id="hero" 
       className="relative flex min-h-screen items-center justify-center text-center overflow-hidden"
       style={{
-        backgroundImage: 'linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px)',
+        backgroundImage: 'linear-gradient(to right, hsla(var(--foreground) / 0.03) 1px, transparent 1px), linear-gradient(to bottom, hsla(var(--foreground) / 0.03) 1px, transparent 1px)',
         backgroundSize: '40px 40px',
       }}
     >
       <div className="container mx-auto flex max-w-4xl flex-col items-center px-4 py-20 z-10">
         <div className="mb-6 inline-block -rotate-3 transform">
-          <div className="bg-yellow-400 text-neutral-800 px-6 py-2 rounded-lg shadow-md">
+          <div className="bg-primary/10 text-primary px-6 py-2 rounded-lg shadow-md border border-primary/20">
             <span className="text-lg font-semibold">A UX Designer</span>
           </div>
         </div>
         
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground">
           Making sense of <br className="md:hidden"/> messy problems, <br className="hidden md:block"/> one <br className="md:hidden"/> pixel at a time.
         </h1>
         
         {/* Profile Card and Arrow */}
         <div className="mt-16 relative flex flex-col items-center md:flex-row md:items-end md:justify-end w-full max-w-md md:self-end md:mr-[-5%]">
-          <CurvedArrowIcon className="absolute text-neutral-700 w-20 h-20 md:w-28 md:h-28 transform md:translate-x-[-80px] md:translate-y-[-70px] translate-x-[-60px] translate-y-[-50px] scale-y-[-1] rotate-[20deg] md:rotate-0" />
-          <div className="bg-card p-4 rounded-xl shadow-2xl w-64 text-left relative">
+          <CurvedArrowIcon className="absolute text-foreground/70 w-20 h-20 md:w-28 md:h-28 transform md:translate-x-[-80px] md:translate-y-[-70px] translate-x-[-60px] translate-y-[-50px] scale-y-[-1] rotate-[20deg] md:rotate-0" />
+          <div className="bg-card p-4 rounded-xl shadow-2xl w-64 text-left relative border border-border">
             <Image
-              src="https://picsum.photos/seed/hrithik-profile/200/200"
-              alt="Hrithik Sinha"
+              src="https://picsum.photos/seed/ankit-profile/200/200"
+              alt="Ankit Bansod"
               width={60}
               height={60}
               className="rounded-full mb-3 border-2 border-primary"
               data-ai-hint="cartoon avatar"
             />
             <p className="text-sm text-foreground/80">
-              Hi, I&apos;m Hrithik Sinha and I design intuitive, user-centered experiences.
+              Hi, I&apos;m Ankit Bansod and I design intuitive, user-centered experiences.
             </p>
           </div>
         </div>
@@ -90,18 +90,18 @@ export function HeroSection() {
       </div>
 
       {/* Decorative Sparkles */}
-      <SparkleIcon className="absolute top-[15%] left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary opacity-80 transform -rotate-12" />
-      <SparkleIcon className="absolute bottom-[20%] right-[12%] w-10 h-10 md:w-14 md:h-14 text-primary opacity-80 transform rotate-6" />
-       <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary opacity-60 transform rotate-45 hidden md:block" />
-       <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary opacity-70 transform -rotate-45 hidden md:block" />
+      <SparkleIcon className="absolute top-[15%] left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary/80 opacity-80 transform -rotate-12" />
+      <SparkleIcon className="absolute bottom-[20%] right-[12%] w-10 h-10 md:w-14 md:h-14 text-primary/80 opacity-80 transform rotate-6" />
+       <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary/70 opacity-60 transform rotate-45 hidden md:block" />
+       <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary/70 opacity-70 transform -rotate-45 hidden md:block" />
 
 
       <SmoothScrollLink
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0  text-primary hover:opacity-70 z-20 animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 text-primary hover:opacity-70 z-20 animate-bounce"
         aria-label="Scroll to about section"
       >
-        <FlowerScrollIcon className="h-10 w-10 text-blue-600" />
+        <FlowerScrollIcon className="h-10 w-10 text-primary" />
       </SmoothScrollLink>
       
       <div className="absolute bottom-4 right-4 z-20">
@@ -109,7 +109,7 @@ export function HeroSection() {
           href="https://framer.com" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="text-xs bg-background/70 text-muted-foreground px-2 py-1 rounded-md shadow hover:shadow-lg transition-shadow"
+          className="text-xs bg-background/70 text-muted-foreground px-2 py-1 rounded-md shadow hover:shadow-lg transition-shadow border border-border"
         >
           ⚡️ Made in Framer
         </a>
@@ -117,3 +117,4 @@ export function HeroSection() {
     </section>
   );
 }
+

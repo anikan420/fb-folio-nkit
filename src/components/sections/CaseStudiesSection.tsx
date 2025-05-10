@@ -1,132 +1,123 @@
 // src/components/sections/CaseStudiesSection.tsx
 import { SectionWrapper } from '@/components/layout/SectionWrapper';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ExternalLink, Github } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface CaseStudy {
   id: string;
+  category: string;
   title: string;
-  description: string;
-  longDescription: string;
-  thumbnailUrl: string;
-  imageUrl: string;
-  tags: string[];
-  liveLink?: string;
-  repoLink?: string;
+  description: string; // This will be the short description
+  longDescription: string; // This can be used for a future detail page
+  imageUrl: string; // Main image for the right panel
+  tags: string[]; // Kept for potential future use (e.g., detail page, filtering)
+  liveLink?: string; // Placeholder for "Read case study" link for now
+  repoLink?: string; // Kept for potential future use
   dataAiHint: string;
 }
 
 const caseStudiesData: CaseStudy[] = [
   {
     id: '1',
-    title: 'E-commerce Platform "ShopSphere"',
-    description: 'A fully functional online store with robust features for a seamless shopping experience.',
+    category: 'E-COMMERCE - WEB PLATFORM',
+    title: 'ShopSphere: Seamless Online Retail',
+    description: 'A fully functional online store with robust features for a seamless shopping experience, including dynamic product listings and secure payments.',
     longDescription: 'ShopSphere is a modern e-commerce platform built from the ground up, featuring dynamic product listings, an intuitive cart management system, and secure payment processing through Stripe integration. It offers a responsive design for optimal viewing on all devices and an admin panel for easy product and order management.',
-    thumbnailUrl: 'https://picsum.photos/seed/shopsphere-thumb/600/400',
     imageUrl: 'https://picsum.photos/seed/shopsphere-main/1200/800',
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe', 'E-commerce'],
-    liveLink: '#',
+    liveLink: '#', // Link to case study detail page
     repoLink: '#',
-    dataAiHint: 'online store',
+    dataAiHint: 'online store interface',
   },
   {
     id: '2',
-    title: 'Project Management Tool "TaskMaster"',
-    description: 'A collaborative platform designed to streamline team workflows and task tracking.',
+    category: 'PRODUCTIVITY - SAAS TOOL',
+    title: 'TaskMaster: Collaborative Project Hub',
+    description: 'A collaborative platform designed to streamline team workflows and task tracking with Kanban boards and real-time updates.',
     longDescription: 'TaskMaster empowers teams to manage projects efficiently with features like task assignment, progress tracking with Kanban boards, real-time collaboration, and file sharing. Built with Vue.js and Firebase, it offers a reactive and real-time experience. The UI is styled with Tailwind CSS for a clean and modern look.',
-    thumbnailUrl: 'https://picsum.photos/seed/taskmaster-thumb/600/400',
     imageUrl: 'https://picsum.photos/seed/taskmaster-main/1200/800',
     tags: ['Vue.js', 'Firebase', 'Tailwind CSS', 'Productivity'],
     liveLink: '#',
     repoLink: '#',
-    dataAiHint: 'dashboard interface',
+    dataAiHint: 'project dashboard',
   },
   {
     id: '3',
-    title: 'AI-Powered Chatbot "InquireAI"',
-    description: 'An intelligent chatbot leveraging NLP for enhanced customer service and engagement.',
+    category: 'ARTIFICIAL INTELLIGENCE - CUSTOMER SERVICE',
+    title: 'InquireAI: Intelligent Chat Assistance',
+    description: 'An intelligent chatbot leveraging NLP for enhanced customer service and engagement, improving response times and user satisfaction.',
     longDescription: 'InquireAI is a sophisticated chatbot application developed using Python and Dialogflow for natural language processing. It integrates with existing customer service platforms via a Flask backend and provides a React-based chat interface. The bot is trained to handle a wide range of customer queries, improving response times and user satisfaction.',
-    thumbnailUrl: 'https://picsum.photos/seed/inquireai-thumb/600/400',
     imageUrl: 'https://picsum.photos/seed/inquireai-main/1200/800',
     tags: ['Python', 'Dialogflow', 'Flask', 'React', 'AI'],
+    liveLink: '#',
     repoLink: '#',
-    dataAiHint: 'chatbot interface',
+    dataAiHint: 'chatbot conversation',
   },
   {
     id: '4',
-    title: 'Mobile Fitness App UI "FitTrack"',
-    description: 'A sleek and intuitive UI/UX design for a mobile fitness tracking application.',
+    category: 'UI/UX DESIGN - MOBILE APPLICATION',
+    title: 'FitTrack: Intuitive Fitness Tracking UI',
+    description: 'A sleek and intuitive UI/UX design for a mobile fitness tracking application, focusing on clarity and ease of navigation.',
     longDescription: 'FitTrack\'s UI was meticulously designed in Figma, focusing on user experience for tracking fitness goals, workout routines, and progress. The design emphasizes clarity, ease of navigation, and motivational elements. It includes features like personalized dashboards, progress charts, and social sharing capabilities, all wrapped in a visually appealing interface.',
-    thumbnailUrl: 'https://picsum.photos/seed/fittrack-thumb/600/400',
     imageUrl: 'https://picsum.photos/seed/fittrack-main/1200/800',
     tags: ['Figma', 'UI/UX Design', 'Mobile App', 'Fitness'],
-    dataAiHint: 'mobile app',
+    liveLink: '#',
+    dataAiHint: 'fitness app dashboard',
   },
 ];
 
 export function CaseStudiesSection() {
   return (
-    <SectionWrapper id="case-studies" className="bg-muted/30">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+    <SectionWrapper id="case-studies" className="bg-background">
+      <div className="text-left mb-12 md:mb-16">
+        <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground">
           My Case Studies
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-foreground/80">
-          Dive into some of the projects I&apos;ve passionately built, showcasing my skills in development and design.
+        <p className="mt-4 max-w-2xl text-lg text-foreground/80">
+          Explore some of the projects where I&apos;ve applied my design and development expertise to create impactful solutions.
         </p>
       </div>
 
-      <div className="space-y-12 md:space-y-16">
-        {caseStudiesData.map((study) => (
-          <Card key={study.id} className="w-full overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-            <CardHeader className="p-0">
-              <div className="relative h-64 md:h-96 w-full">
-                <Image
-                  src={study.imageUrl}
-                  alt={study.title}
-                  layout="fill"
-                  objectFit="cover"
-                  data-ai-hint={study.dataAiHint}
-                />
-                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                 <div className="absolute bottom-0 left-0 p-6 md:p-8">
-                    <CardTitle className="text-2xl md:text-3xl font-bold text-primary-foreground drop-shadow-md">{study.title}</CardTitle>
-                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-6 md:p-8">
-              <CardDescription className="text-base md:text-lg text-foreground/90 mb-4">
-                {study.longDescription}
-              </CardDescription>
-              <div className="mb-6">
-                {study.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="mr-2 mb-2 text-sm">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-4">
-                {study.liveLink && (
-                  <Button asChild size="lg">
-                    <Link href={study.liveLink} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="mr-2 h-5 w-5" /> Live Demo
-                    </Link>
-                  </Button>
-                )}
-                {study.repoLink && (
-                  <Button asChild variant="outline" size="lg">
-                    <Link href={study.repoLink} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-5 w-5" /> View Repository
-                    </Link>
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
+      <div className="space-y-20 md:space-y-24">
+        {caseStudiesData.map((study, index) => (
+          <div 
+            key={study.id} 
+            className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center ${
+              index % 2 !== 0 ? 'md:grid-flow-row-dense' : '' // Alternate layout for md screens
+            }`}
+          >
+            <div className={`flex flex-col justify-center ${index % 2 !== 0 ? 'md:col-start-2' : ''}`}>
+              <p className="mb-2 text-sm font-medium uppercase tracking-wider text-primary">
+                {study.category}
+              </p>
+              <h3 className="mb-4 text-3xl md:text-4xl font-bold text-foreground">
+                {study.title}
+              </h3>
+              <p className="mb-6 text-lg text-foreground/80">
+                {study.description}
+              </p>
+              <Link
+                href={study.liveLink || '#'}
+                target={study.liveLink && study.liveLink !== '#' ? '_blank' : '_self'}
+                rel={study.liveLink && study.liveLink !== '#' ? 'noopener noreferrer' : ''}
+                className="inline-flex items-center text-lg font-medium text-primary hover:text-primary/80 transition-colors group"
+              >
+                Read case study
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+            <div className={`relative h-80 md:h-[450px] w-full overflow-hidden rounded-xl shadow-2xl ${index % 2 !== 0 ? 'md:col-start-1' : ''}`}>
+              <Image
+                src={study.imageUrl}
+                alt={study.title}
+                layout="fill"
+                objectFit="cover"
+                className="transition-transform duration-500 hover:scale-105"
+                data-ai-hint={study.dataAiHint}
+              />
+            </div>
+          </div>
         ))}
       </div>
     </SectionWrapper>
