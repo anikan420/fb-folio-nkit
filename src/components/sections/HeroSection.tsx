@@ -58,7 +58,6 @@ export function HeroSection() {
     "messy problems,",
     "one pixel at a time."
   ];
-  const fullText = fullTextLines.join(" "); // For char-by-char animation
   const typingSpeed = 50; // Milliseconds per character
   const lineBreakDelay = 500; // Milliseconds to pause after a line
 
@@ -66,9 +65,12 @@ export function HeroSection() {
     let currentText = '';
     let charIndex = 0;
     let lineIndex = 0;
+    let isMounted = true; // Flag to prevent state updates on unmounted component
     let timeoutId: NodeJS.Timeout;
-
+  
     const type = () => {
+      if (!isMounted) return;
+
       if (lineIndex < fullTextLines.length) {
         const currentLine = fullTextLines[lineIndex];
         if (charIndex < currentLine.length) {
@@ -80,27 +82,20 @@ export function HeroSection() {
           lineIndex++;
           charIndex = 0;
           if (lineIndex < fullTextLines.length) { // If there are more lines
-            currentText += ' '; // Add space for md:hidden break, or prepare for next line
+            currentText += ' '; 
             setDisplayText(currentText); 
-            timeoutId = setTimeout(() => {
-              // Add the line break for small screens before starting next line
-              // For larger screens, the <br /> tags handle the break.
-              // We manage 'currentText' to include line breaks for the effect.
-              if (lineIndex === 1 && typeof window !== 'undefined' && window.innerWidth < 768) {
-                 // currentText += '\n'; // This won't render as a line break in HTML directly
-              } else if (lineIndex === 2 && typeof window !== 'undefined' && window.innerWidth >=768) {
-                 // currentText += '\n';
-              }
-              type();
-            }, lineBreakDelay);
+            timeoutId = setTimeout(type, lineBreakDelay);
           }
         }
       }
     };
-
+  
     timeoutId = setTimeout(type, typingSpeed);
-
-    return () => clearTimeout(timeoutId);
+  
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
+    };
   }, []);
 
 
@@ -122,20 +117,22 @@ export function HeroSection() {
         
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px]">
           {displayText.split(" ").map((word, wordIndex, wordsArray) => {
-            const isMessyProblems = word === "messy" && wordsArray[wordIndex+1] === "problems,";
-            const isOnePixel = word === "one" && wordsArray[wordIndex+1] === "pixel";
-            
+            const isSecondWordOfFirstLine = wordIndex === 1 && fullTextLines[0].split(" ").length > 1 && wordsArray[wordIndex-1] === fullTextLines[0].split(" ")[0];
+            const isSecondWordOfSecondLine = wordIndex > 0 && wordsArray[wordIndex-1] === fullTextLines[0].split(" ").pop() && word === fullTextLines[1].split(" ")[0];
+            const isSecondWordOfThirdLine = wordIndex > 0 && wordsArray[wordIndex-1] === fullTextLines[1].split(" ").pop() && word === fullTextLines[2].split(" ")[0];
+
+
             return (
               <span key={wordIndex}>
                 {word}
-                {wordIndex < wordsArray.length - 1 && ' '}
-                {isMessyProblems && <br className="md:hidden"/>}
-                {isOnePixel && <br className="md:hidden"/>}
-                {word === "problems," && <br className="hidden md:block"/>}
+                {wordIndex < displayText.split(" ").length - 1 && ' '}
+                {(isSecondWordOfFirstLine && fullTextLines[0].endsWith(wordsArray[wordIndex-1])) && <br className="md:hidden"/>}
+                {(word === "problems," || (fullTextLines[0].endsWith(wordsArray[wordIndex-1]) && word === fullTextLines[1].split(" ")[0])) && <br className="hidden md:block"/>}
+                {(word === "pixel" || (fullTextLines[1].endsWith(wordsArray[wordIndex-1]) && word === fullTextLines[2].split(" ")[0])) && <br className="md:hidden"/>}
               </span>
             );
           })}
-          <span className="animate-ping">_</span>
+           {displayText.length < fullTextLines.join(" ").length && <span className="animate-ping">_</span>}
 
         </h1>
         
@@ -181,9 +178,10 @@ export function HeroSection() {
           rel="noopener noreferrer" 
           className="text-xs bg-background/70 text-muted-foreground px-2 py-1 rounded-md shadow hover:shadow-lg transition-shadow border border-border"
         >
-          ⚡️ Made in Framer
+          made with framer
         </a>
       </div>
     </section>
   );
 }
+
