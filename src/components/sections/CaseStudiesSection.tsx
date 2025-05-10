@@ -14,10 +14,10 @@ export function CaseStudiesSection() {
     <> {/* Fragment to hold multiple top-level sections */}
       <SectionWrapper 
         id="case-studies" 
-        className="bg-transparent pt-16 md:pt-24 pb-8 md:pb-12"
+        className="bg-transparent pt-8 md:pt-12 pb-4 md:pb-6" // Reduced padding
         containerClassName="max-w-7xl sm:px-6 lg:px-8" // Align title with header
       >
-        <div className="text-left mb-8 md:mb-12">
+        <div className="text-left mb-4 md:mb-8"> {/* Reduced margin-bottom */}
           <ScrollRevealWrapper delay={0} slideDirection="up" slideOffset="4">
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground font-sans">
               My Case Studies
@@ -137,3 +137,4 @@ export function CaseStudiesSection() {
     </>
   );
 }
+
