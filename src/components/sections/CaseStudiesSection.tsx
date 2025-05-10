@@ -9,12 +9,12 @@ interface CaseStudy {
   id: string;
   category: string;
   title: string;
-  description: string; // This will be the short description
-  longDescription: string; // This can be used for a future detail page
-  imageUrl: string; // Main image for the right panel
-  tags: string[]; // Kept for potential future use (e.g., detail page, filtering)
-  liveLink?: string; // Placeholder for "Read case study" link for now
-  repoLink?: string; // Kept for potential future use
+  description: string;
+  longDescription: string;
+  imageUrl: string;
+  tags: string[];
+  liveLink?: string;
+  repoLink?: string;
   dataAiHint: string;
 }
 
@@ -27,7 +27,7 @@ const caseStudiesData: CaseStudy[] = [
     longDescription: 'ShopSphere is a modern e-commerce platform built from the ground up, featuring dynamic product listings, an intuitive cart management system, and secure payment processing through Stripe integration. It offers a responsive design for optimal viewing on all devices and an admin panel for easy product and order management.',
     imageUrl: 'https://picsum.photos/seed/shopsphere-main/1200/800',
     tags: ['React', 'Node.js', 'MongoDB', 'Stripe', 'E-commerce'],
-    liveLink: '#', // Link to case study detail page
+    liveLink: '#', 
     repoLink: '#',
     dataAiHint: 'online store interface',
   },
@@ -89,12 +89,12 @@ export function CaseStudiesSection() {
               index % 2 !== 0 ? 'md:grid-flow-row-dense' : ''
             )}
           >
-            {/* Colorful Gradient Glow */}
+            {/* Gradient Border on Hover */}
             <div
-              className="absolute -inset-2 -z-10 rounded-3xl bg-gradient-to-br 
-                         from-primary/30 via-accent/30 to-secondary/30
-                         opacity-0 blur-xl transition-all duration-500 ease-out
-                         group-hover:opacity-60 group-hover:scale-105 group-hover:blur-2xl"
+              className="absolute -inset-px -z-10 rounded-2xl
+                         bg-gradient-to-r from-red-500 via-orange-500 to-green-500
+                         opacity-0 transition-opacity duration-300 ease-out
+                         group-hover:opacity-100"
             />
 
             {/* Text content column */}
