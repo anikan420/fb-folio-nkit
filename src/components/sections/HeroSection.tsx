@@ -1,7 +1,7 @@
 // src/components/sections/HeroSection.tsx
 "use client";
 
-import { SmoothScrollLink } from '@/components/SmoothScrollLink';
+import Link from 'next/link'; // Import Next.js Link
 import { useState, useEffect } from 'react';
 
 const SparkleIcon = ({ className }: { className?: string }) => (
@@ -43,14 +43,14 @@ export function HeroSection() {
     "messy problems,",
     "one pixel at a time."
   ];
-  const typingSpeed = 50; // Milliseconds per character
-  const lineBreakDelay = 500; // Milliseconds to pause after a line
+  const typingSpeed = 50; 
+  const lineBreakDelay = 500; 
 
   useEffect(() => {
     let currentText = '';
     let charIndex = 0;
     let lineIndex = 0;
-    let isMounted = true; // Flag to prevent state updates on unmounted component
+    let isMounted = true; 
     let timeoutId: NodeJS.Timeout;
   
     const type = () => {
@@ -63,10 +63,10 @@ export function HeroSection() {
           setDisplayText(currentText);
           charIndex++;
           timeoutId = setTimeout(type, typingSpeed);
-        } else { // End of current line
+        } else { 
           lineIndex++;
           charIndex = 0;
-          if (lineIndex < fullTextLines.length) { // If there are more lines
+          if (lineIndex < fullTextLines.length) { 
             currentText += ' '; 
             setDisplayText(currentText); 
             timeoutId = setTimeout(type, lineBreakDelay);
@@ -81,7 +81,8 @@ export function HeroSection() {
       isMounted = false;
       clearTimeout(timeoutId);
     };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run only once on mount
 
 
   return (
@@ -94,49 +95,61 @@ export function HeroSection() {
       }}
     >
       <div className="container mx-auto flex max-w-4xl flex-col items-center px-4 py-20 z-10">
-        <div className="mb-6 inline-block -rotate-3 transform">
-          <div className="bg-primary/10 text-primary px-6 py-2 rounded-lg shadow-md border border-primary/20">
-            <span className="text-lg font-semibold">A UX Designer</span>
-          </div>
-        </div>
+        {/* Removed the "UX Designer" badge and "Made with Framer" / "Hi, I'm Ankit" cards */}
         
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px]">
           {displayText.split(" ").map((word, wordIndex, wordsArray) => {
-            const isSecondWordOfFirstLine = wordIndex === 1 && fullTextLines[0].split(" ").length > 1 && wordsArray[wordIndex-1] === fullTextLines[0].split(" ")[0];
-            const isSecondWordOfSecondLine = wordIndex > 0 && wordsArray[wordIndex-1] === fullTextLines[0].split(" ").pop() && word === fullTextLines[1].split(" ")[0];
-            const isSecondWordOfThirdLine = wordIndex > 0 && wordsArray[wordIndex-1] === fullTextLines[1].split(" ").pop() && word === fullTextLines[2].split(" ")[0];
+             // Determine if a line break is needed based on the original fullTextLines structure
+            let needsBreakAfter = false;
+            if (lineIndex < fullTextLines.length -1) { // Check if not the last line
+                const currentDisplayLine = displayText.substring(0, displayText.lastIndexOf(fullTextLines[lineIndex].slice(-1)) +1);
+                if (fullTextLines[lineIndex] === currentDisplayLine.trim().split(" ").slice(-fullTextLines[lineIndex].split(" ").length).join(" ") && word === fullTextLines[lineIndex].split(" ").pop()) {
+                     needsBreakAfter = true;
+                }
+            }
+            
+            let lineIndex = 0;
+            let tempLength = 0;
+            for(let i=0; i < fullTextLines.length; i++){
+                tempLength += fullTextLines[i].length + (i > 0 ? 1 : 0); // +1 for space between lines
+                if(displayText.length <= tempLength) {
+                    lineIndex = i;
+                    break;
+                }
+            }
+
+            const isEndOfLineWord = word === fullTextLines[lineIndex]?.split(" ").pop() && displayText.endsWith(word);
+            const isNotLastLine = lineIndex < fullTextLines.length - 1;
 
 
             return (
               <span key={wordIndex}>
                 {word}
                 {wordIndex < displayText.split(" ").length - 1 && ' '}
-                {(isSecondWordOfFirstLine && fullTextLines[0].endsWith(wordsArray[wordIndex-1])) && <br className="md:hidden"/>}
-                {(word === "problems," || (fullTextLines[0].endsWith(wordsArray[wordIndex-1]) && word === fullTextLines[1].split(" ")[0])) && <br className="hidden md:block"/>}
-                {(word === "pixel" || (fullTextLines[1].endsWith(wordsArray[wordIndex-1]) && word === fullTextLines[2].split(" ")[0])) && <br className="md:hidden"/>}
+                {isEndOfLineWord && isNotLastLine && <br />}
               </span>
             );
           })}
            {displayText.length < fullTextLines.join(" ").length && <span className="animate-ping">_</span>}
-
         </h1>
       </div>
 
       {/* Decorative Sparkles */}
       <SparkleIcon className="absolute top-[15%] left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary/80 opacity-80 transform -rotate-12" />
       <SparkleIcon className="absolute bottom-[20%] right-[12%] w-10 h-10 md:w-14 md:h-14 text-primary/80 opacity-80 transform rotate-6" />
-       <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary/70 opacity-60 transform rotate-45 hidden md:block" />
-       <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary/70 opacity-70 transform -rotate-45 hidden md:block" />
+      <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary/70 opacity-60 transform rotate-45 hidden md:block" />
+      <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary/70 opacity-70 transform -rotate-45 hidden md:block" />
 
-
-      <SmoothScrollLink
-        href="#about"
+      <Link
+        href="/about" // Changed to Next.js Link and points to /about page
         className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-10 md:translate-x-0 text-primary hover:opacity-70 z-20 animate-bounce"
-        aria-label="Scroll to about section"
+        aria-label="Go to about page"
       >
         <FlowerScrollIcon className="h-10 w-10 text-primary" />
-      </SmoothScrollLink>
+      </Link>
       
     </section>
   );
 }
+
+    
