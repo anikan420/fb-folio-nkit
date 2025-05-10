@@ -13,8 +13,8 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
   { name: 'Work', href: '/#case-studies', isHomePageAnchor: true },
-  { name: 'About', href: '/about' }, 
-  { name: 'Contact', href: '/#contact', isHomePageAnchor: true }, 
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/#contact', isHomePageAnchor: true },
 ];
 
 export function Header() {
@@ -24,10 +24,10 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20); 
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); 
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -37,16 +37,16 @@ export function Header() {
 
   const renderNavLink = (item: typeof navItems[0], isMobile: boolean = false) => {
     const baseClasses = "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors";
-    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted/50"; // Ensure hover on mobile is also somewhat transparent if muted is glass
+    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted/50";
     const commonClasses = isMobile ? mobileClasses : `${baseClasses} group relative`;
 
 
     if (item.isHomePageAnchor) {
-      if (pathname === '/') { 
+      if (pathname === '/') {
         return (
           <SmoothScrollLink
             key={item.name}
-            href={item.href.substring(1)} 
+            href={item.href.substring(1)}
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
@@ -54,11 +54,11 @@ export function Header() {
             {!isMobile && <span className="absolute bottom-0 left-0 h-[1.5px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>}
           </SmoothScrollLink>
         );
-      } else { 
+      } else {
         return (
           <Link
             key={item.name}
-            href={item.href} 
+            href={item.href}
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
@@ -87,21 +87,22 @@ export function Header() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border/20' : 'bg-transparent' 
+        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border/20' : 'bg-transparent'
       )}
     >
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
           <Image
-            src="/logo.png" 
+            src="/logo.png"
             alt="Ankit Bansod Logo"
-            width={32}
-            height={32}
-            className="rounded-md" 
+            width={28} // Reduced from 32
+            height={28} // Reduced from 32
+            className="rounded-md"
             data-ai-hint="geometric logo"
           />
+          {/* Removed Ankit Bansod text */}
         </Link>
-        
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-3 lg:space-x-4">
           {navItems.map((item) => renderNavLink(item))}
@@ -127,11 +128,12 @@ export function Header() {
                    <Image
                     src="/logo.png"
                     alt="Ankit Bansod Logo"
-                    width={32}
-                    height={32}
-                    className="rounded-md" 
+                    width={28} // Reduced from 32
+                    height={28} // Reduced from 32
+                    className="rounded-md"
                     data-ai-hint="geometric logo"
                   />
+                   {/* Removed Ankit Bansod text */}
                 </Link>
               </div>
               <nav className="flex flex-col space-y-3">
