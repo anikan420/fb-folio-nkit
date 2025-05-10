@@ -11,7 +11,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-background">
+    <footer id="contact" className="border-t border-border/50 bg-background">
       <div className="container mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 sm:flex-row">
         <p className="text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} DeepWork. All rights reserved.
