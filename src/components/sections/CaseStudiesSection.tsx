@@ -53,7 +53,7 @@ export function CaseStudiesSection() {
                     <div // This is the styled card (grid, background, border, etc.)
                       className={cn(
                         "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden", // Padding changed to p-6 (24px)
-                        "bg-card/80 backdrop-blur-md", // Glassmorphism effect for the card
+                        "bg-card/60 backdrop-blur-lg", // Enhanced glassmorphism effect for the card
                         "border border-border/10", // Subtle resting border
                         "transition-all duration-300 ease-out",
                         // Animated gradient border on hover (group from Link parent)
@@ -136,4 +136,3 @@ export function CaseStudiesSection() {
     </>
   );
 }
-
