@@ -40,11 +40,14 @@ export function CaseStudiesSection() {
                   "group relative transition-all duration-300 ease-out",
                 )}
               >
-                {/* Gradient effects removed as per user request for cleaner cards */}
-                
                 <div
                   className={cn(
-                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 bg-background/50 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden border border-border/20" // Glassmorphism: bg-background/50, backdrop-blur-lg, border
+                    "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 md:p-8 rounded-2xl shadow-2xl overflow-hidden border border-border/20",
+                    "bg-card", // Base background
+                    "group-hover:bg-background/60 group-hover:backdrop-blur-lg", // Glass effect on hover
+                    "transition-all duration-300 ease-out", // Smooth transition for bg and blur
+                    // Animated border on hover (applied to ::before pseudo-element)
+                    "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent before:group-hover:bg-[linear-gradient(135deg,theme(colors.primary/0.4),theme(colors.orange.500/0.4),theme(colors.green.500/0.4))] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 before:group-hover:opacity-100 before:transition-opacity before:duration-500"
                   )}
                 >
                   <ScrollRevealWrapper
@@ -86,12 +89,12 @@ export function CaseStudiesSection() {
                     slideDirection={isTextOnLeft ? 'right' : 'left'}
                     slideOffset="10"
                     className={cn(
-                      `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full`, 
+                      `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full aspect-[4/3] md:aspect-auto`, // Added aspect ratio for consistency, md:aspect-auto for larger screens
                       isTextOnLeft ? 'md:col-start-2 md:row-start-1' : 'md:col-start-1 md:row-start-1'
                     )}
                   >
                     <div className={cn( 
-                        `relative h-80 md:h-[450px] w-full`, 
+                        `relative h-full w-full`, // Changed from fixed height to h-full
                         `transition-transform duration-300 ease-out`,
                         "group-hover:scale-105", // Keep image zoom on hover
                         !isTextOnLeft 
@@ -103,7 +106,7 @@ export function CaseStudiesSection() {
                         alt={study.title}
                         layout="fill"
                         objectFit="cover"
-                        className="transition-transform duration-500 ease-out group-hover:scale-110" // Keep inner image scale, but parent scale is removed
+                        className="transition-transform duration-500 ease-out group-hover:scale-110" 
                         data-ai-hint={study.dataAiHint}
                         priority={index < 2} 
                       />
@@ -118,4 +121,3 @@ export function CaseStudiesSection() {
     </SectionWrapper>
   );
 }
-
