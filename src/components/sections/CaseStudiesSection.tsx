@@ -57,7 +57,7 @@ export function CaseStudiesSection() {
                         "border border-border/10", // Subtle resting border
                         "transition-all duration-300 ease-out",
                         // Animated gradient border on hover (group from Link parent)
-                        "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1))_0%,hsl(var(--chart-4))_50%,hsl(var(--chart-2))_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
+                        "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.5)_0%,hsl(var(--chart-4)/0.5)_50%,hsl(var(--chart-2)/0.5)_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                       )}
                     >
                       {/* Text content block */}
@@ -80,7 +80,7 @@ export function CaseStudiesSection() {
                           <h3 className="mb-10 text-3xl md:text-4xl font-bold text-foreground font-sans"> {/* Title to Subtitle: mb-10 (40px) */}
                             {study.title}
                           </h3>
-                          <p className="text-lg text-foreground/80 font-sans line-clamp-3 md:line-clamp-none mb-[380px]"> {/* Subtitle to Button: mb-[380px] */}
+                          <p className="text-lg text-foreground/80 font-sans line-clamp-3 md:line-clamp-none mb-[200px]"> {/* Subtitle to Button: mb-[200px] */}
                             {study.description}
                           </p>
                           <Button
@@ -136,3 +136,4 @@ export function CaseStudiesSection() {
     </>
   );
 }
+
