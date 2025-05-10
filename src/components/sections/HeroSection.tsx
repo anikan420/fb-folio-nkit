@@ -19,11 +19,6 @@ export function HeroSection() {
               Get In Touch
             </Button>
           </SmoothScrollLink>
-          <SmoothScrollLink href="#work">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto rounded-full px-8 py-3 text-lg font-semibold">
-              View My Work
-            </Button>
-          </SmoothScrollLink>
         </div>
       </div>
       <SmoothScrollLink
