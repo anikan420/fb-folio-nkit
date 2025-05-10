@@ -93,14 +93,13 @@ export function Header() {
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
           <Image
-            src="https://picsum.photos/seed/avatarlogo/40/40" 
-            alt="Logo Ankit Bansod"
+            src="/logo.png" 
+            alt="Ankit Bansod Logo"
             width={32}
             height={32}
-            className="rounded-full"
-            data-ai-hint="abstract logo"
+            className="rounded-md" 
+            data-ai-hint="geometric logo"
           />
-           <span className="font-sans">Ankit Bansod</span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -126,14 +125,13 @@ export function Header() {
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
-                    src="https://picsum.photos/seed/avatarlogo-mobile/40/40"
-                    alt="Logo Ankit Bansod"
+                    src="/logo.png"
+                    alt="Ankit Bansod Logo"
                     width={32}
                     height={32}
-                    className="rounded-full"
-                    data-ai-hint="abstract logo"
+                    className="rounded-md" 
+                    data-ai-hint="geometric logo"
                   />
-                  <span className="font-sans">Ankit Bansod</span>
                 </Link>
               </div>
               <nav className="flex flex-col space-y-3">
