@@ -1,23 +1,44 @@
 // src/components/sections/CaseStudiesSection.tsx
+"use client"; 
+
+import { useState } from 'react'; 
+import { useRouter } from 'next/navigation'; 
 import { SectionWrapper } from '@/components/layout/SectionWrapper';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { caseStudiesData } from '@/lib/data/caseStudies';
+import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { PasswordModal } from '@/components/modals/PasswordModal'; 
 
 export function CaseStudiesSection() {
+  const router = useRouter();
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
+
+  const handleCaseStudyClick = (study: CaseStudy) => {
+    setSelectedCaseStudy(study);
+    setIsPasswordModalOpen(true);
+  };
+
+  const handlePasswordSuccess = () => {
+    if (selectedCaseStudy) {
+      router.push(`/case-studies/${selectedCaseStudy.id}`);
+    }
+    setIsPasswordModalOpen(false); 
+  };
+
+
   return (
-    <> {/* Fragment to hold multiple top-level sections */}
-      <SectionWrapper 
-        id="case-studies" 
-        className="bg-transparent pt-8 md:pt-12 pb-4 md:pb-6" // Reduced padding
-        containerClassName="max-w-7xl sm:px-6 lg:px-8" // Align title with header
+    <>
+      <SectionWrapper
+        id="case-studies"
+        className="bg-transparent pt-8 md:pt-12 pb-4 md:pb-6"
+        containerClassName="max-w-7xl sm:px-6 lg:px-8"
       >
-        <div className="text-left mb-4 md:mb-8"> {/* Reduced margin-bottom */}
+        <div className="text-left mb-4 md:mb-8">
           <ScrollRevealWrapper delay={0} slideDirection="up" slideOffset="4">
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground font-sans">
               My Case Studies
@@ -31,40 +52,44 @@ export function CaseStudiesSection() {
         </div>
       </SectionWrapper>
 
-      {/* Container for the full-page cards, aligned with header */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {caseStudiesData.map((study, index) => {
           const isTextOnLeft = index % 2 === 0;
           return (
             <section
               key={study.id}
-              className="min-h-screen flex items-center justify-center py-12 md:py-20" // Each card is a full-height section
+              className="min-h-screen flex items-center justify-center py-12 md:py-20"
             >
-              <Link href={`/case-studies/${study.id}`} passHref className="block w-full group" aria-label={`View case study for ${study.title}`}>
+              <div
+                onClick={() => handleCaseStudyClick(study)}
+                className="block w-full group cursor-pointer"
+                aria-label={`View case study for ${study.title}`}
+                role="button" 
+                tabIndex={0} 
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCaseStudyClick(study);}} 
+              >
                 <ScrollRevealWrapper
-                  threshold={0.25} // When 25% of the card section is visible
+                  threshold={0.25}
                   once={true}
-                  delay={50} // Stagger appearance of each card section
+                  delay={50}
                   slideDirection="up"
                   slideOffset="10"
                 >
-                  <div // This is the card visual container
+                  <div
                     className={cn(
                       "relative transition-all duration-300 ease-out",
                     )}
                   >
-                    <div // This is the styled card (grid, background, border, etc.)
+                    <div
                       className={cn(
                         "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden", 
-                        "bg-card/60 backdrop-blur-lg", // Glassmorphism: --card color with 60% opacity and blur
+                        "bg-card/60 backdrop-blur-lg", 
                         "border border-border/10", 
                         "transition-all duration-300 ease-out"
-                        // Removed hover gradient border: "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.5)_0%,hsl(var(--chart-4)/0.5)_50%,hsl(var(--chart-2)/0.5)_100%)] before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                       )}
                     >
-                      {/* Text content block */}
                       <ScrollRevealWrapper
-                        delay={100} // Delay relative to the card appearing
+                        delay={100} 
                         slideDirection={isTextOnLeft ? 'left' : 'right'}
                         slideOffset="8"
                         className={cn(
@@ -79,27 +104,24 @@ export function CaseStudiesSection() {
                           <Badge variant="secondary" className="mb-4 text-xs px-3 py-1 bg-primary/10 border-primary/30 text-primary self-start">
                             {study.category}
                           </Badge>
-                          <h3 className="mb-10 text-3xl md:text-4xl font-bold text-foreground font-sans"> {/* Title to Subtitle: mb-10 (40px) */}
+                          <h3 className="mb-10 text-3xl md:text-4xl font-bold text-foreground font-sans">
                             {study.title}
                           </h3>
-                          <p className="text-lg text-foreground/80 font-sans line-clamp-3 md:line-clamp-none mb-[200px]"> {/* Subtitle to Button: mb-[200px] */}
+                          <p className="text-lg text-foreground/80 font-sans line-clamp-3 md:line-clamp-none mb-[200px]">
                             {study.description}
                           </p>
-                          <Button
-                            asChild
-                            variant="link"
-                            size="lg"
+                          <div
+                            role="button" 
                             className="text-primary hover:text-primary/90 p-0 self-start font-semibold group-hover:underline"
                           >
                             <span className="inline-flex items-center text-base gap-2"> 
                               Read case study
                               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-rotate-45" />
                             </span>
-                          </Button>
+                          </div>
                         </div>
                       </ScrollRevealWrapper>
 
-                      {/* Image block */}
                       <ScrollRevealWrapper
                         delay={150} 
                         slideDirection={isTextOnLeft ? 'right' : 'left'}
@@ -129,12 +151,19 @@ export function CaseStudiesSection() {
                     </div>
                   </div>
                 </ScrollRevealWrapper>
-              </Link>
+              </div>
             </section>
           );
         })}
       </div>
+      {selectedCaseStudy && (
+        <PasswordModal
+          isOpen={isPasswordModalOpen}
+          onOpenChange={setIsPasswordModalOpen}
+          onPasswordSuccess={handlePasswordSuccess}
+          caseStudyTitle={selectedCaseStudy.title}
+        />
+      )}
     </>
   );
 }
-
