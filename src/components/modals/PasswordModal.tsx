@@ -1,6 +1,7 @@
 // src/components/modals/PasswordModal.tsx
 "use client";
 
+import * as React from 'react'; // Added React import
 import { useState, type FormEvent, useEffect } from 'react';
 import {
   Dialog,
