@@ -27,7 +27,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    handleScroll(); // Set initial state
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -46,7 +46,7 @@ export function Header() {
         return (
           <SmoothScrollLink
             key={item.name}
-            href={item.href.substring(1)}
+            href={item.href.substring(1)} // Assumes href like "/#section"
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
@@ -55,10 +55,11 @@ export function Header() {
           </SmoothScrollLink>
         );
       } else {
+        // If on a different page, navigate to home page then scroll
         return (
           <Link
             key={item.name}
-            href={item.href}
+            href={item.href} // Full path like "/#section"
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
@@ -69,6 +70,7 @@ export function Header() {
       }
     }
 
+    // For non-anchor links (like /about)
     return (
       <Link
         key={item.name}
@@ -93,11 +95,11 @@ export function Header() {
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
           <Image
-            src="/logo.png" // Updated image path
-            alt="Ankit Bansod Logo" // Updated alt text
-            width={28} // Adjusted width for better fit
-            height={28} // Adjusted height for better fit
-            className="rounded-md" // Keep rounded-md if desired, or remove if logo has transparency
+            src="/logo.png" 
+            alt="Ankit Bansod Logo" 
+            width={32} 
+            height={32} 
+            className="rounded-md" 
             data-ai-hint="geometric logo"
             priority 
           />
@@ -126,10 +128,10 @@ export function Header() {
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
-                    src="/logo.png" // Updated image path for mobile menu
-                    alt="Ankit Bansod Logo" // Updated alt text for mobile menu
-                    width={28} // Adjusted width for mobile menu
-                    height={28} // Adjusted height for mobile menu
+                    src="/logo.png" 
+                    alt="Ankit Bansod Logo"
+                    width={32} 
+                    height={32} 
                     className="rounded-md"
                     data-ai-hint="geometric logo"
                     priority 
