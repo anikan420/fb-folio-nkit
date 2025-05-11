@@ -27,10 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning={true}>
-      <body className={`${poppins.variable} ${geistMono.variable} font-sans antialiased`}> {/* Used poppins variable and added font-sans */}
+      <body 
+        className={`${poppins.variable} ${geistMono.variable} font-sans antialiased`}
+        suppressHydrationWarning={true} // Added to address hydration errors from browser extensions
+      >
         {children}
         <Toaster />
       </body>
     </html>
   );
 }
+
