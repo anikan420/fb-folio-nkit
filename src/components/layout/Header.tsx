@@ -95,8 +95,8 @@ export function Header() {
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
           <Image
-            src="/logo.png" 
-            alt="Ankit Bansod Logo" 
+            src="/logo.svg" 
+            alt="DeepWork Logo" 
             width={32} 
             height={32} 
             className="rounded-md" 
@@ -128,8 +128,8 @@ export function Header() {
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
-                    src="/logo.png" 
-                    alt="Ankit Bansod Logo"
+                    src="/logo.svg" 
+                    alt="DeepWork Logo"
                     width={32} 
                     height={32} 
                     className="rounded-md"
