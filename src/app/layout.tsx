@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning={true}>
       <body className={`${poppins.variable} ${geistMono.variable} font-sans antialiased`}> {/* Used poppins variable and added font-sans */}
         {children}
         <Toaster />
@@ -34,4 +34,3 @@ export default function RootLayout({
     </html>
   );
 }
-
