@@ -93,13 +93,13 @@ export function Header() {
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-foreground hover:opacity-80 transition-opacity" onClick={handleLinkClick}>
           <Image
-            src="/logo.png"
-            alt="Ankit Bansod Logo"
-            width={28} 
-            height={28} 
-            className="rounded-md"
+            src="/logo.png" // Updated image path
+            alt="Ankit Bansod Logo" // Updated alt text
+            width={28} // Adjusted width for better fit
+            height={28} // Adjusted height for better fit
+            className="rounded-md" // Keep rounded-md if desired, or remove if logo has transparency
             data-ai-hint="geometric logo"
-            priority // Added priority
+            priority 
           />
         </Link>
 
@@ -126,13 +126,13 @@ export function Header() {
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
-                    src="/logo.png"
-                    alt="Ankit Bansod Logo"
-                    width={28} 
-                    height={28} 
+                    src="/logo.png" // Updated image path for mobile menu
+                    alt="Ankit Bansod Logo" // Updated alt text for mobile menu
+                    width={28} // Adjusted width for mobile menu
+                    height={28} // Adjusted height for mobile menu
                     className="rounded-md"
                     data-ai-hint="geometric logo"
-                    priority // Added priority
+                    priority 
                   />
                 </Link>
               </div>
