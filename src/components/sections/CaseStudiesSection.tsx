@@ -1,42 +1,148 @@
 // src/components/sections/CaseStudiesSection.tsx
 "use client";
 
-import type { KeyboardEvent } from 'react';
+import type { KeyboardEvent, FC } from 'react'; // Added FC for explicit component typing
 import { useState } from 'react';
-import type { CaseStudy } from '@/lib/data/caseStudies'; // Keep type for selectedCaseStudy
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ArrowRight } from 'lucide-react';
+import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies';
+import { SectionWrapper } from '@/components/layout/SectionWrapper';
+import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { PasswordModal } from '@/components/modals/PasswordModal';
+import { cn } from '@/lib/utils';
 
+// Changed to a named export
 export function CaseStudiesSection(): JSX.Element {
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
+  const router = useRouter();
 
-  // Minimal placeholder event handlers
   const handleCaseStudyClick = (study: CaseStudy): void => {
-    setSelectedCaseStudy(study);
-    setIsPasswordModalOpen(true);
-    console.log("Minimal: Case study clicked - ", study.title);
+    if (study.id === 'shopsphere' || study.id === 'taskmaster' || study.id === 'inquireai' || study.id === 'fittrack') {
+      setSelectedCaseStudy(study);
+      setIsPasswordModalOpen(true);
+    } else {
+      router.push(`/case-studies/${study.id}`);
+    }
   };
 
   const handlePasswordSuccess = (): void => {
+    if (selectedCaseStudy) {
+      router.push(`/case-studies/${selectedCaseStudy.id}`);
+    }
     setIsPasswordModalOpen(false);
-    console.log("Minimal: Password success");
   };
 
-  // This handler won't be actively used in this minimal version as there are no cards to key down on.
-  // const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>, study: CaseStudy): void => {
-  //   if (event.key === 'Enter' || event.key === ' ') {
-  //     event.preventDefault();
-  //     handleCaseStudyClick(study);
-  //   }
-  // };
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>, study: CaseStudy): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCaseStudyClick(study);
+    }
+  };
 
   return (
-    <div className="case-studies-wrapper-minimal">
-      <p>This is a minimal test of the CaseStudiesSection.</p>
-      <p>Attempting to trigger modal:</p>
-      <button onClick={() => handleCaseStudyClick({id: 'test', title: 'Test Study'} as CaseStudy)}>
-        Open Test Modal
-      </button>
+    <div className="case-studies-wrapper">
+      <SectionWrapper
+        id="case-studies"
+        className="bg-transparent pt-8 md:pt-12 pb-16 md:pb-24"
+        containerClassName="max-w-7xl"
+      >
+        <div className="text-left mb-10 md:mb-16">
+          <ScrollRevealWrapper delay={0} slideDirection="up" slideOffset="4">
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground font-sans">
+              My Case Studies
+            </h2>
+          </ScrollRevealWrapper>
+          <ScrollRevealWrapper delay={100} slideDirection="up" slideOffset="4">
+            <p className="mt-3 max-w-2xl text-lg text-foreground/70 font-sans">
+              Explore projects where design and development expertise created impactful solutions.
+            </p>
+          </ScrollRevealWrapper>
+        </div>
+      </SectionWrapper>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {caseStudiesData.map((study, index) => {
+          const isTextOnLeft = index % 2 === 0;
+          return (
+            <ScrollRevealWrapper
+              key={study.id}
+              delay={100 + index * 100}
+              slideDirection={isTextOnLeft ? 'right' : 'left'}
+              slideOffset="20"
+              className="mb-16 md:mb-24 group"
+              threshold={0.1}
+            >
+              <div
+                role="button"
+                tabIndex={0}
+                className={cn(
+                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden bg-card/60 backdrop-blur-lg border border-border/10 transition-all duration-300 ease-out"
+                  // Removed gradient border classes from here as they were causing issues
+                  // "hover:shadow-primary/20",
+                  // "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
+                  // "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.7)_0%,hsl(var(--chart-4)/0.7)_50%,hsl(var(--chart-2)/0.7)_100%)]",
+                  // "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
+                  // "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
+                )}
+                onClick={() => handleCaseStudyClick(study)}
+                onKeyDown={(e) => handleCardKeyDown(e, study)}
+              >
+                <div
+                  className={cn(
+                    "transition-transform duration-300 ease-out py-4 md:py-0 flex flex-col justify-center p-6 md:p-10",
+                    isTextOnLeft ? "md:order-1" : "md:order-2"
+                  )}
+                >
+                  <Badge
+                    variant="secondary"
+                    className="mb-3 self-start bg-primary/10 text-primary text-xs px-2 py-0.5 border border-primary/20"
+                  >
+                    {study.category}
+                  </Badge>
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-sans"> {/* Increased mb from 4 to 6 */}
+                    {study.title}
+                  </h3>
+                  <p className="text-foreground/70 mb-auto text-base leading-relaxed font-sans">
+                    {study.description}
+                  </p>
+                  <div className="mt-[200px]">
+                    <Button
+                      variant="link"
+                      size="lg"
+                      className="p-0 self-start text-primary hover:text-primary/90 font-semibold group-hover:underline inline-flex items-center text-base gap-2" // Added gap-2
+                    >
+                      Read case study
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:-rotate-45" />
+                    </Button>
+                  </div>
+                </div>
+
+                <div
+                  className={cn(
+                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-lg md:rounded-none",
+                    isTextOnLeft ? "md:order-2 md:rounded-r-xl" : "md:order-1 md:rounded-l-xl"
+                  )}
+                >
+                  <Image
+                    src={study.imageUrl}
+                    alt={study.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="transform transition-all duration-700 ease-out group-hover:scale-105"
+                    data-ai-hint={study.dataAiHint}
+                    priority={index < 2}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/5 group-hover:from-black/10 transition-all duration-300"></div>
+                </div>
+              </div>
+            </ScrollRevealWrapper>
+          );
+        })}
+      </div>
 
       {selectedCaseStudy && (
         <PasswordModal
