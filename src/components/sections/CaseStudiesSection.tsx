@@ -1,7 +1,7 @@
-
+// src/components/sections/CaseStudiesSection.tsx
 "use client";
 
-import type { FC, KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -12,9 +12,9 @@ import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 import { Badge } from '@/components/ui/badge';
 import { PasswordModal } from '@/components/modals/PasswordModal';
-// import { SectionWrapper } from '@/components/layout/SectionWrapper'; // Kept commented as per previous steps
+// import { SectionWrapper } from '@/components/layout/SectionWrapper';
 
-export const CaseStudiesSection: FC = () => {
+export function CaseStudiesSection(): JSX.Element {
   const router = useRouter();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
@@ -33,6 +33,7 @@ export const CaseStudiesSection: FC = () => {
 
   const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>, study: CaseStudy): void => {
     if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
       handleCaseStudyClick(study);
     }
   };
@@ -42,8 +43,8 @@ export const CaseStudiesSection: FC = () => {
       {/*
       <SectionWrapper
         id="case-studies"
-        className="bg-transparent pt-8 md:pt-12 pb-16 md:pb-24" // Reduced padding
-        containerClassName="max-w-7xl" // Ensures content aligns with header
+        className="bg-transparent pt-8 md:pt-12 pb-16 md:pb-24"
+        containerClassName="max-w-7xl"
       >
         <div className="text-left mb-10 md:mb-16">
           <ScrollRevealWrapper
@@ -82,7 +83,7 @@ export const CaseStudiesSection: FC = () => {
                 aria-label={`View case study for ${study.title}`}
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e) => handleCardKeyDown(e, study)}
+                onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => handleCardKeyDown(e, study)}
               >
                 <ScrollRevealWrapper
                   threshold={0.25}
@@ -94,8 +95,9 @@ export const CaseStudiesSection: FC = () => {
                   <div
                     className={cn(
                       "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden",
-                      "bg-card/80 backdrop-blur-md border border-border/10", 
+                      "bg-card/80 backdrop-blur-md border border-border/10", // Glassmorphism
                       "transition-all duration-300 ease-out"
+                      // Removed gradient border for now to simplify
                     )}
                   >
                       <ScrollRevealWrapper
@@ -122,7 +124,7 @@ export const CaseStudiesSection: FC = () => {
                           </p>
                           <div
                             role="button"
-                            className="text-primary hover:text-primary/90 p-0 self-start font-semibold group-hover:underline"
+                            className="text-yellow-400 hover:text-yellow-300 p-0 self-start font-semibold group-hover:underline"
                           >
                             <span className="inline-flex items-center text-base gap-2">
                               Read case study
@@ -176,4 +178,4 @@ export const CaseStudiesSection: FC = () => {
       )}
     </div>
   );
-};
+}
