@@ -11,7 +11,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-background/30 backdrop-blur-lg border-t border-border/20 shadow-lg"> {/* Glassmorphism style */}
+    <footer id="contact" className="bg-background/30 backdrop-blur-lg border-t border-border shadow-lg"> {/* Changed border-border/20 to border-border */}
       <div className="container mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6 lg:px-8"> {/* Align with header */}
         <p className="text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} All rights reserved by Ankit.

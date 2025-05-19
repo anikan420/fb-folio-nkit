@@ -53,7 +53,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
         {(study.services || study.client || study.duration) && (
             <ScrollRevealWrapper delay={150} className="mb-8 md:mb-12">
                 <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">Key Information</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-muted/40 backdrop-blur-md rounded-lg shadow border border-border/10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-muted rounded-lg shadow border border-border"> {/* Changed from bg-muted/40 and border-border/10 */}
                     {study.client && (
                         <div>
                             <h3 className="text-sm font-semibold uppercase text-primary mb-1">Client</h3>
@@ -94,7 +94,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                 <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">Impact & Results</h2>
                 <ul className="space-y-3">
                     {study.results.map((result, index) => (
-                        <li key={index} className="flex items-start p-4 bg-card/30 backdrop-blur-sm border border-border/10 rounded-lg shadow-sm">
+                        <li key={index} className="flex items-start p-4 bg-card rounded-lg shadow-sm border border-border"> {/* Changed from bg-card/30 and border-border/10 */}
                             <svg className="flex-shrink-0 w-6 h-6 text-primary mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                             <span className="text-foreground/80">{result}</span>
                         </li>
@@ -105,7 +105,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
         
         {/* Testimonial */}
         {study.testimonial && (
-             <ScrollRevealWrapper delay={300} className="mb-8 md:mb-12 p-6 bg-muted/40 backdrop-blur-md rounded-lg shadow border border-border/10">
+             <ScrollRevealWrapper delay={300} className="mb-8 md:mb-12 p-6 bg-muted rounded-lg shadow border border-border"> {/* Changed from bg-muted/40 and border-border/10 */}
                 <blockquote className="relative">
                     <svg className="absolute top-0 left-0 transform -translate-x-2 -translate-y-2 h-8 w-8 text-primary/30" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                         <path d="M9.333 7C6.94 7 5 8.94 5 11.333V18h4.667v-4.667h2.333V11.333C12 8.94 10.06 7 7.667 7zM23.333 7C20.94 7 19 8.94 19 11.333V18h4.667v-4.667h2.333V11.333C26 8.94 24.06 7 21.667 7z"/>
@@ -124,7 +124,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-foreground">Technologies Used</h2>
           <div className="flex flex-wrap gap-2">
             {study.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-sm px-3 py-1 bg-secondary/50 backdrop-blur-sm"> {/* Added glass effect to badges */}
+              <Badge key={tag} variant="secondary" className="text-sm px-3 py-1 bg-secondary text-secondary-foreground"> {/* Changed from bg-secondary/50 backdrop-blur-sm */}
                 {tag}
               </Badge>
             ))}

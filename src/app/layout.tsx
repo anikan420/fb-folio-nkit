@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning={true}>
-      <body 
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
+      <body
         className={`${poppins.variable} ${geistMono.variable} font-sans antialiased`}
         suppressHydrationWarning={true} // Added to address hydration errors from browser extensions
       >
@@ -37,4 +37,3 @@ export default function RootLayout({
     </html>
   );
 }
-

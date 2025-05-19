@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button'; // No longer using Button for "Read case study"
 import { PasswordModal } from '@/components/modals/PasswordModal'; 
 
 export function CaseStudiesSection() {
@@ -58,7 +58,7 @@ export function CaseStudiesSection() {
           return (
             <section
               key={study.id}
-              className="min-h-screen flex items-center justify-center py-12 md:py-20"
+              className="min-h-screen flex items-center justify-center py-12 md:py-20" // Increased py
             >
               <div
                 onClick={() => handleCaseStudyClick(study)}
@@ -83,9 +83,12 @@ export function CaseStudiesSection() {
                     <div
                       className={cn(
                         "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden", 
-                        "bg-card/60 backdrop-blur-lg", 
-                        "border border-border/10", 
-                        "transition-all duration-300 ease-out"
+                        "bg-card border border-border", // Changed from bg-card/60 and border-border/10
+                        "transition-all duration-300 ease-out",
+                        "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
+                        "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1))_0%,hsl(var(--chart-4))_50%,hsl(var(--chart-2))_100%)]", // Full opacity gradient
+                        "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
+                        "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                       )}
                     >
                       <ScrollRevealWrapper
