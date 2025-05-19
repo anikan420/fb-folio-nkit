@@ -1,8 +1,8 @@
 
 "use client";
 
+import type { FC, KeyboardEvent } from 'react';
 import { useState } from 'react';
-import type { KeyboardEvent } from 'react'; // Import KeyboardEvent type
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
@@ -12,10 +12,9 @@ import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 import { Badge } from '@/components/ui/badge';
 import { PasswordModal } from '@/components/modals/PasswordModal';
-import { SectionWrapper } from '@/components/layout/SectionWrapper';
+// import { SectionWrapper } from '@/components/layout/SectionWrapper'; // Kept commented as per previous steps
 
-
-export function CaseStudiesSection() {
+export const CaseStudiesSection: FC = () => {
   const router = useRouter();
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
@@ -30,6 +29,12 @@ export function CaseStudiesSection() {
       router.push(`/case-studies/${selectedCaseStudy.id}`);
     }
     setIsPasswordModalOpen(false);
+  };
+
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLDivElement>, study: CaseStudy): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleCaseStudyClick(study);
+    }
   };
 
   return (
@@ -77,11 +82,7 @@ export function CaseStudiesSection() {
                 aria-label={`View case study for ${study.title}`}
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    handleCaseStudyClick(study);
-                  }
-                }}
+                onKeyDown={(e) => handleCardKeyDown(e, study)}
               >
                 <ScrollRevealWrapper
                   threshold={0.25}
@@ -93,12 +94,8 @@ export function CaseStudiesSection() {
                   <div
                     className={cn(
                       "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden",
-                      "bg-card border border-border", 
-                      "transition-all duration-300 ease-out",
-                      "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
-                      "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.6)_0%,hsl(var(--chart-4)/0.6)_50%,hsl(var(--chart-2)/0.6)_100%)]",
-                      "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
-                      "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
+                      "bg-card/80 backdrop-blur-md border border-border/10", 
+                      "transition-all duration-300 ease-out"
                     )}
                   >
                       <ScrollRevealWrapper
@@ -179,4 +176,4 @@ export function CaseStudiesSection() {
       )}
     </div>
   );
-}
+};
