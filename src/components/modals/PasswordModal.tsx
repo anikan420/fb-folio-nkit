@@ -94,9 +94,9 @@ export function PasswordModal({
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="w-full max-w-xs">
-          <div className="space-y-4 py-2"> {/* Reduced space-y from 6 */}
+          <div className="space-y-4 py-2">
             <div className="space-y-2 w-full">
-              <Label htmlFor="password_modal_input" className="text-sm font-medium text-left block w-full">
+              <Label htmlFor="password_modal_input" className="text-sm font-medium text-center block w-full">
                 Password
               </Label>
               <div className="relative">
@@ -106,7 +106,7 @@ export function PasswordModal({
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pr-10 rounded-md w-full" // Ensured rounded-md
+                  className="pr-10 rounded-[2px] w-full" 
                   placeholder="Enter password"
                   required
                   aria-describedby={error ? "password-error" : undefined}
@@ -127,7 +127,7 @@ export function PasswordModal({
             {error && <p id="password-error" className="text-sm text-destructive text-center pt-1">{error}</p>}
           </div>
           <DialogFooter className="pt-6 flex flex-col items-center space-y-3 w-full">
-            <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-md"> {/* Ensured rounded-md */}
+            <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-md">
               Unlock
             </Button>
             <DialogClose asChild>
