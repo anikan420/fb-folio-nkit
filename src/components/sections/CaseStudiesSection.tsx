@@ -1,8 +1,8 @@
-// src/components/sections/CaseStudiesSection.tsx
-"use client"; 
 
-import { useState } from 'react'; 
-import { useRouter } from 'next/navigation'; 
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { SectionWrapper } from '@/components/layout/SectionWrapper';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
@@ -10,8 +10,7 @@ import { cn } from '@/lib/utils';
 import { caseStudiesData, type CaseStudy } from '@/lib/data/caseStudies';
 import { ScrollRevealWrapper } from '@/components/animation/ScrollRevealWrapper';
 import { Badge } from '@/components/ui/badge';
-// import { Button } from '@/components/ui/button'; // No longer using Button for "Read case study"
-import { PasswordModal } from '@/components/modals/PasswordModal'; 
+import { PasswordModal } from '@/components/modals/PasswordModal';
 
 export function CaseStudiesSection() {
   const router = useRouter();
@@ -27,7 +26,7 @@ export function CaseStudiesSection() {
     if (selectedCaseStudy) {
       router.push(`/case-studies/${selectedCaseStudy.id}`);
     }
-    setIsPasswordModalOpen(false); 
+    setIsPasswordModalOpen(false);
   };
 
 
@@ -58,15 +57,15 @@ export function CaseStudiesSection() {
           return (
             <section
               key={study.id}
-              className="min-h-screen flex items-center justify-center py-12 md:py-20" // Increased py
+              className="min-h-screen flex items-center justify-center py-12 md:py-20"
             >
               <div
                 onClick={() => handleCaseStudyClick(study)}
                 className="block w-full group cursor-pointer"
                 aria-label={`View case study for ${study.title}`}
-                role="button" 
-                tabIndex={0} 
-                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCaseStudyClick(study);}} 
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCaseStudyClick(study);}}
               >
                 <ScrollRevealWrapper
                   threshold={0.25}
@@ -77,32 +76,27 @@ export function CaseStudiesSection() {
                 >
                   <div
                     className={cn(
-                      "relative transition-all duration-300 ease-out",
+                      "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden",
+                      "bg-card border border-border",
+                      "transition-all duration-300 ease-out",
+                      "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
+                      "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1))_0%,hsl(var(--chart-4))_50%,hsl(var(--chart-2))_100%)]",
+                      "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
+                      "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                     )}
                   >
-                    <div
-                      className={cn(
-                        "relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden", 
-                        "bg-card border border-border", // Changed from bg-card/60 and border-border/10
-                        "transition-all duration-300 ease-out",
-                        "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
-                        "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1))_0%,hsl(var(--chart-4))_50%,hsl(var(--chart-2))_100%)]", // Full opacity gradient
-                        "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
-                        "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
-                      )}
-                    >
                       <ScrollRevealWrapper
-                        delay={100} 
+                        delay={100}
                         slideDirection={isTextOnLeft ? 'left' : 'right'}
                         slideOffset="8"
                         className={cn(
-                          `flex flex-col justify-start h-full`, 
+                          `flex flex-col justify-start h-full`,
                           isTextOnLeft ? 'md:col-start-1 md:row-start-1' : 'md:col-start-2 md:row-start-1',
-                          'md:order-1' 
+                          'md:order-1'
                         )}
                       >
                         <div className={cn(
-                          `transition-transform duration-300 ease-out py-4 md:py-0 flex flex-col`, 
+                          `transition-transform duration-300 ease-out py-4 md:py-0 flex flex-col`,
                         )}>
                           <Badge variant="secondary" className="mb-4 text-xs px-3 py-1 bg-primary/10 border-primary/30 text-primary self-start">
                             {study.category}
@@ -114,10 +108,10 @@ export function CaseStudiesSection() {
                             {study.description}
                           </p>
                           <div
-                            role="button" 
+                            role="button"
                             className="text-primary hover:text-primary/90 p-0 self-start font-semibold group-hover:underline"
                           >
-                            <span className="inline-flex items-center text-base gap-2"> 
+                            <span className="inline-flex items-center text-base gap-2">
                               Read case study
                               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-rotate-45" />
                             </span>
@@ -126,33 +120,33 @@ export function CaseStudiesSection() {
                       </ScrollRevealWrapper>
 
                       <ScrollRevealWrapper
-                        delay={150} 
+                        delay={150}
                         slideDirection={isTextOnLeft ? 'right' : 'left'}
                         slideOffset="8"
                         className={cn(
                           `relative w-full overflow-hidden rounded-xl shadow-lg flex flex-col justify-center h-full aspect-[4/3] md:aspect-auto`,
                           isTextOnLeft ? 'md:col-start-2 md:row-start-1' : 'md:col-start-1 md:row-start-1',
-                          'md:order-2' 
+                          'md:order-2'
                         )}
                       >
                         <div className={cn(
                           `relative h-full w-full`,
                           `transition-transform duration-300 ease-out`,
-                          "group-hover:scale-105", 
+                          "group-hover:scale-105",
                         )}>
                           <Image
                             src={study.imageUrl}
                             alt={study.title}
                             layout="fill"
                             objectFit="cover"
-                            className="rounded-lg transition-transform duration-500 ease-out" 
+                            className="rounded-lg transition-transform duration-500 ease-out"
                             data-ai-hint={study.dataAiHint}
-                            priority={index < 2} 
+                            priority={index < 2}
                           />
                         </div>
                       </ScrollRevealWrapper>
                     </div>
-                  </div>
+                  </ScrollRevealWrapper>
                 </ScrollRevealWrapper>
               </div>
             </section>
