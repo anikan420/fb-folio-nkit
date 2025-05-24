@@ -79,7 +79,7 @@ export function CaseStudiesSection(): JSX.Element {
                 role="button"
                 tabIndex={0}
                 className={cn(
-                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-xl shadow-lg overflow-hidden bg-card border border-border transition-all duration-300 ease-out group-hover:shadow-[0_6px_12px_hsl(var(--primary)/0.15)]"
+                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out group-hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
