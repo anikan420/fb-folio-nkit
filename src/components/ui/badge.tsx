@@ -4,14 +4,14 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full border p-1.5 text-[10px] font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", // Changed to p-1.5 (6px) and text-[10px]
+  "inline-flex items-center rounded-full border px-1 py-1 text-[10px] font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", // Changed padding to px-1 py-1
   {
     variants: {
       variant: {
         default:
           "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
         secondary:
-          "border-transparent bg-secondary/50 backdrop-blur-sm text-secondary-foreground hover:bg-secondary/70", // Glassmorphic secondary badge
+          "border-transparent bg-secondary/50 backdrop-blur-sm text-secondary-foreground hover:bg-secondary/70", 
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",

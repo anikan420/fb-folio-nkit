@@ -80,7 +80,7 @@ export function CaseStudiesSection(): JSX.Element {
                 tabIndex={0}
                 className={cn(
                   "relative grid grid-cols-1 md:grid-cols-2 md:gap-10 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out",
-                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.10)]" 
+                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
@@ -93,7 +93,7 @@ export function CaseStudiesSection(): JSX.Element {
                 >
                   <Badge
                     variant="secondary"
-                    className="mb-3 self-start bg-primary/10 text-primary text-[10px] p-1.5 border border-primary/20" // Updated text size and padding
+                    className="mb-3 self-start bg-primary/10 text-primary text-[10px] border border-primary/20" 
                   >
                     {study.category}
                   </Badge>
@@ -121,7 +121,7 @@ export function CaseStudiesSection(): JSX.Element {
 
                 <div
                   className={cn(
-                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl", // Ensure image container has matching radius
+                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl",
                     isTextOnLeft ? "md:order-2" : "md:order-1" 
                   )}
                 >

@@ -124,7 +124,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-foreground">Technologies Used</h2>
           <div className="flex flex-wrap gap-2">
             {study.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-[10px] p-1.5 bg-secondary text-secondary-foreground"> {/* Updated text size and padding */}
+              <Badge key={tag} variant="secondary" className="text-[10px] bg-secondary text-secondary-foreground">
                 {tag}
               </Badge>
             ))}

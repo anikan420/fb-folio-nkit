@@ -29,7 +29,7 @@ export interface CaseStudy {
 export const caseStudiesData: CaseStudy[] = [
   {
     id: 'shopsphere',
-    category: 'E-COMMERCE - WEB PLATFORM',
+    category: 'E-commerce - Web platform',
     title: 'ShopSphere: Seamless Online Retail',
     description: 'A fully functional online store with robust features for a seamless shopping experience, including dynamic product listings and secure payments.',
     longDescription: 'ShopSphere is a modern e-commerce platform built from the ground up, featuring dynamic product listings, an intuitive cart management system, and secure payment processing through Stripe integration. It offers a responsive design for optimal viewing on all devices and an admin panel for easy product and order management. The tech stack includes React for the frontend, Node.js with Express for the backend, and MongoDB for the database. User authentication, product search, and filtering are key features.',
@@ -55,7 +55,7 @@ export const caseStudiesData: CaseStudy[] = [
   },
   {
     id: 'taskmaster',
-    category: 'PRODUCTIVITY - SAAS TOOL',
+    category: 'Productivity - SaaS tool',
     title: 'TaskMaster: Collaborative Project Hub',
     description: 'A collaborative platform designed to streamline team workflows and task tracking with Kanban boards and real-time updates.',
     longDescription: 'TaskMaster empowers teams to manage projects efficiently with features like task assignment, progress tracking with Kanban boards, real-time collaboration, and file sharing. Built with Vue.js and Firebase, it offers a reactive and real-time experience. The UI is styled with Tailwind CSS for a clean and modern look. It supports multiple project workspaces and user roles.',
@@ -82,7 +82,7 @@ export const caseStudiesData: CaseStudy[] = [
   },
   {
     id: 'inquireai',
-    category: 'ARTIFICIAL INTELLIGENCE - CUSTOMER SERVICE',
+    category: 'Artificial intelligence - Customer service',
     title: 'InquireAI: Intelligent Chat Assistance',
     description: 'An intelligent chatbot leveraging NLP for enhanced customer service and engagement, improving response times and user satisfaction.',
     longDescription: 'InquireAI is a sophisticated chatbot application developed using Python and Dialogflow for natural language processing. It integrates with existing customer service platforms via a Flask backend and provides a React-based chat interface. The bot is trained to handle a wide range of customer queries, escalate complex issues to human agents, and learn from interactions to improve its responses over time.',
@@ -107,7 +107,7 @@ export const caseStudiesData: CaseStudy[] = [
   },
   {
     id: 'fittrack',
-    category: 'UI/UX DESIGN - MOBILE APPLICATION',
+    category: 'UI/UX design - Mobile application',
     title: 'FitTrack: Intuitive Fitness Tracking UI',
     description: 'A sleek and intuitive UI/UX design for a mobile fitness tracking application, focusing on clarity and ease of navigation.',
     longDescription: 'FitTrack\'s UI was meticulously designed in Figma, focusing on user experience for tracking fitness goals, workout routines, and progress. The design emphasizes clarity, ease of navigation, and motivational elements. It includes features like personalized dashboards, progress charts, social sharing capabilities, and gamified challenges, all wrapped in a visually appealing and accessible interface. Extensive user research and usability testing informed the design process.',
@@ -127,5 +127,3 @@ export const caseStudiesData: CaseStudy[] = [
     ]
   },
 ];
-
-    
