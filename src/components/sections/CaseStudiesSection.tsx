@@ -1,7 +1,7 @@
 // src/components/sections/CaseStudiesSection.tsx
 "use client";
 
-import type { KeyboardEvent, FC } from 'react'; // Added FC for explicit component typing
+import type { KeyboardEvent, FC } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,7 +14,6 @@ import { Button } from '@/components/ui/button';
 import { PasswordModal } from '@/components/modals/PasswordModal';
 import { cn } from '@/lib/utils';
 
-// Changed to a named export
 export function CaseStudiesSection(): JSX.Element {
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState<boolean>(false);
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
@@ -80,13 +79,11 @@ export function CaseStudiesSection(): JSX.Element {
                 role="button"
                 tabIndex={0}
                 className={cn(
-                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-2xl shadow-2xl overflow-hidden bg-card/60 backdrop-blur-lg border border-border/10 transition-all duration-300 ease-out"
-                  // Removed gradient border classes from here as they were causing issues
-                  // "hover:shadow-primary/20",
-                  // "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
-                  // "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.7)_0%,hsl(var(--chart-4)/0.7)_50%,hsl(var(--chart-2)/0.7)_100%)]",
-                  // "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
-                  // "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
+                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-2xl shadow-lg overflow-hidden bg-card/60 backdrop-blur-lg border border-border/10 transition-all duration-300 ease-out group-hover:shadow-[0_6px_12px_hsl(var(--primary)/0.15)]",
+                  "before:content-[''] before:absolute before:inset-0 before:rounded-2xl before:p-px before:bg-transparent",
+                  "group-hover:before:bg-[linear-gradient(135deg,hsl(var(--chart-1)/0.7)_0%,hsl(var(--chart-4)/0.7)_50%,hsl(var(--chart-2)/0.7)_100%)]",
+                  "before:[mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)]",
+                  "before:[mask-composite:exclude] before:opacity-0 group-hover:before:opacity-100 before:transition-opacity before:duration-500"
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
@@ -103,7 +100,7 @@ export function CaseStudiesSection(): JSX.Element {
                   >
                     {study.category}
                   </Badge>
-                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-sans"> {/* Increased mb from 4 to 6 */}
+                  <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6 font-sans">
                     {study.title}
                   </h3>
                   <p className="text-foreground/70 mb-auto text-base leading-relaxed font-sans">
@@ -113,7 +110,7 @@ export function CaseStudiesSection(): JSX.Element {
                     <Button
                       variant="link"
                       size="lg"
-                      className="p-0 self-start text-primary hover:text-primary/90 font-semibold group-hover:underline inline-flex items-center text-base gap-2" // Added gap-2
+                      className="p-0 self-start text-primary hover:text-primary/90 font-semibold group-hover:underline inline-flex items-center text-base gap-2"
                     >
                       Read case study
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:-rotate-45" />
