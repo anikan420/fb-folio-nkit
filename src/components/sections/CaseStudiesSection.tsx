@@ -79,7 +79,8 @@ export function CaseStudiesSection(): JSX.Element {
                 role="button"
                 tabIndex={0}
                 className={cn(
-                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out group-hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out",
+                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.1)]" // Removed default shadow, only on hover
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
@@ -116,7 +117,7 @@ export function CaseStudiesSection(): JSX.Element {
 
                 <div
                   className={cn(
-                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-lg md:rounded-none",
+                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl md:rounded-none", // Changed rounded-lg to rounded-xl
                     isTextOnLeft ? "md:order-2 md:rounded-r-xl" : "md:order-1 md:rounded-l-xl"
                   )}
                 >

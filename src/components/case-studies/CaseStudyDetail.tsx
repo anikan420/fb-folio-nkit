@@ -137,7 +137,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
                 <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">Project Gallery</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                     {study.gallery.map((image, index) => (
-                        <div key={index} className="relative aspect-video w-full overflow-hidden rounded-lg shadow-lg">
+                        <div key={index} className="relative aspect-video w-full overflow-hidden rounded-xl shadow-lg"> {/* Changed rounded-lg to rounded-xl */}
                             <Image src={image.url} alt={image.alt} layout="fill" objectFit="cover" data-ai-hint={image.dataAiHint} />
                         </div>
                     ))}
