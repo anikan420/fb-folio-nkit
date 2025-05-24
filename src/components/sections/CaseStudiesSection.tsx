@@ -80,14 +80,14 @@ export function CaseStudiesSection(): JSX.Element {
                 tabIndex={0}
                 className={cn(
                   "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out",
-                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.1)]" // Removed default shadow, only on hover
+                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
               >
                 <div
                   className={cn(
-                    "transition-transform duration-300 ease-out py-4 md:py-0 flex flex-col justify-center p-6 md:p-10",
+                    "transition-transform duration-300 ease-out flex flex-col justify-center",
                     isTextOnLeft ? "md:order-1" : "md:order-2"
                   )}
                 >
@@ -108,6 +108,10 @@ export function CaseStudiesSection(): JSX.Element {
                       variant="link"
                       size="lg"
                       className="p-0 self-start text-primary hover:text-primary/90 font-semibold group-hover:underline inline-flex items-center text-base gap-2"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent card click when button is clicked
+                        handleCaseStudyClick(study);
+                      }}
                     >
                       Read case study
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:-rotate-45" />
@@ -117,7 +121,7 @@ export function CaseStudiesSection(): JSX.Element {
 
                 <div
                   className={cn(
-                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl md:rounded-none", // Changed rounded-lg to rounded-xl
+                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl md:rounded-none",
                     isTextOnLeft ? "md:order-2 md:rounded-r-xl" : "md:order-1 md:rounded-l-xl"
                   )}
                 >
