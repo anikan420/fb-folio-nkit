@@ -79,8 +79,8 @@ export function CaseStudiesSection(): JSX.Element {
                 role="button"
                 tabIndex={0}
                 className={cn(
-                  "relative grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out",
-                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                  "relative grid grid-cols-1 md:grid-cols-2 md:gap-10 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out", // Added md:gap-10
+                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]" 
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
@@ -109,7 +109,7 @@ export function CaseStudiesSection(): JSX.Element {
                       size="lg"
                       className="p-0 self-start text-primary hover:text-primary/90 font-semibold group-hover:underline inline-flex items-center text-base gap-2"
                       onClick={(e) => {
-                        e.stopPropagation(); // Prevent card click when button is clicked
+                        e.stopPropagation(); 
                         handleCaseStudyClick(study);
                       }}
                     >
@@ -121,8 +121,8 @@ export function CaseStudiesSection(): JSX.Element {
 
                 <div
                   className={cn(
-                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl md:rounded-none",
-                    isTextOnLeft ? "md:order-2 md:rounded-r-xl" : "md:order-1 md:rounded-l-xl"
+                    "relative w-full h-64 md:h-auto min-h-[300px] md:min-h-[500px] overflow-hidden rounded-xl",
+                    isTextOnLeft ? "md:order-2" : "md:order-1" 
                   )}
                 >
                   <Image
