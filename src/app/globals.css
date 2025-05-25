@@ -2,6 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  To use the Gilroy font, you need to:
+  1. Obtain the Gilroy font files (e.g., .woff2).
+  2. Place them in your `public/fonts` directory (create it if it doesn't exist).
+  3. Define @font-face rules below, pointing to your font files.
+
+  Example @font-face rules for Gilroy:
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/fonts/Gilroy-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  Adjust paths and weights as per the font files you have.
+*/
+
 @layer base {
   :root {
     --background: 0 0% 100%; /* White */
@@ -46,13 +89,11 @@
     --sidebar-accent-foreground: 240 10% 3.9%; /* Near black */
     --sidebar-border: 0 0% 89.8%; /* Light Gray Border */
     --sidebar-ring: 220 80% 60%; /* Vibrant Blue for Ring */
+
+    --radius: 0.5rem;
   }
 
   .dark {
-    /* Keeping dark mode variables for potential future use or if ShadCN relies on them,
-       but they will be overridden by :root if 'dark' class is not on html.
-       For a "white-only" site, these would ideally match :root or be a true dark theme.
-       Currently, they reflect the original dark theme. */
     --background: 0 0% 3%; 
     --foreground: 0 0% 98%; 
 
@@ -98,9 +139,8 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    /* background-image: linear-gradient(135deg, hsl(0, 0%, 3%), hsl(0, 0%, 15%)); /* Original Dark Gradient */
-    background-image: none; /* Remove gradient for solid background */
-    background-color: hsl(var(--background)); /* Use CSS variable for background color */
+    background-image: none; 
+    background-color: hsl(var(--background)); 
     background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;

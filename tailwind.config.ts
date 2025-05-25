@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-    darkMode: ["class"], // Kept dark mode for theme structure, but site is light by default.
+    darkMode: ["class"], 
     content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -67,7 +67,7 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
       fontFamily: {
-        sans: ['var(--font-bodoni-moda)', 'serif'], // Changed to Bodoni Moda and serif fallback
+        sans: ['Gilroy', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
         mono: ['var(--font-geist-mono)', 'monospace'],
       },
   		keyframes: {

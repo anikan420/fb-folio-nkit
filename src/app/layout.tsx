@@ -1,15 +1,11 @@
 
 import type { Metadata } from 'next';
-import { Bodoni_Moda, Geist_Mono } from 'next/font/google'; // Changed Poppins to Bodoni_Moda
+import { Geist_Mono } from 'next/font/google'; // Removed Bodoni_Moda
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
-const bodoniModa = Bodoni_Moda({ // Changed from poppins to bodoniModa
-  variable: '--font-bodoni-moda', // New CSS variable
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'], // Bodoni Moda weights
-  style: ['normal', 'italic'], // Include italic styles if available and needed
-});
+// Gilroy will be loaded via @font-face in globals.css if available
+// const gilroy = localFont({ src: '../path/to/gilroy.woff2', variable: '--font-gilroy' }) // Example if self-hosting with next/font/local
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -29,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
       <body
-        className={`${bodoniModa.variable} ${geistMono.variable} font-sans antialiased`} // Used bodoniModa variable
+        className={`${geistMono.variable} font-sans antialiased`} // Removed Bodoni Moda variable, font-sans will pick up Gilroy from Tailwind config
         suppressHydrationWarning={true}
       >
         {children}
