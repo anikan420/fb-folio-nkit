@@ -1,13 +1,14 @@
 
 import type { Metadata } from 'next';
-import { Poppins, Geist_Mono } from 'next/font/google';
+import { Bodoni_Moda, Geist_Mono } from 'next/font/google'; // Changed Poppins to Bodoni_Moda
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
-const poppins = Poppins({
-  variable: '--font-poppins',
+const bodoniModa = Bodoni_Moda({ // Changed from poppins to bodoniModa
+  variable: '--font-bodoni-moda', // New CSS variable
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], // Include a range of weights
+  weight: ['400', '500', '600', '700', '800', '900'], // Bodoni Moda weights
+  style: ['normal', 'italic'], // Include italic styles if available and needed
 });
 
 const geistMono = Geist_Mono({
@@ -28,8 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning={true}>
       <body
-        className={`${poppins.variable} ${geistMono.variable} font-sans antialiased`}
-        suppressHydrationWarning={true} // Added to address hydration errors from browser extensions
+        className={`${bodoniModa.variable} ${geistMono.variable} font-sans antialiased`} // Used bodoniModa variable
+        suppressHydrationWarning={true}
       >
         {children}
         <Toaster />

@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { name: 'Work', href: '/#case-studies', isHomePageAnchor: true },
   { name: 'About', href: '/about' },
+  { name: 'Blog', href: '/blog' }, // Added Blog link
   { name: 'Contact', href: '/#contact', isHomePageAnchor: true },
 ];
 
@@ -27,7 +28,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Set initial state
+    handleScroll(); 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -46,7 +47,7 @@ export function Header() {
         return (
           <SmoothScrollLink
             key={item.name}
-            href={item.href.substring(1)} // Assumes href like "/#section"
+            href={item.href.substring(1)} 
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
@@ -55,11 +56,10 @@ export function Header() {
           </SmoothScrollLink>
         );
       } else {
-        // If on a different page, navigate to home page then scroll
         return (
           <Link
             key={item.name}
-            href={item.href} // Full path like "/#section"
+            href={item.href} 
             className={commonClasses}
             onClick={isMobile ? handleLinkClick : undefined}
           >
@@ -70,7 +70,6 @@ export function Header() {
       }
     }
 
-    // For non-anchor links (like /about)
     return (
       <Link
         key={item.name}
@@ -89,7 +88,7 @@ export function Header() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border' : 'bg-transparent' // Changed border-border/20 to border-border
+        isScrolled ? 'bg-background/30 backdrop-blur-lg shadow-lg border-b border-border' : 'bg-transparent'
       )}
     >
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -105,7 +104,6 @@ export function Header() {
           />
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-3 lg:space-x-4">
           {navItems.map((item) => renderNavLink(item))}
           <Button asChild variant="default" size="sm" className="rounded-full shadow-sm hover:shadow-md transition-shadow bg-foreground text-background hover:bg-foreground/90">
@@ -115,7 +113,6 @@ export function Header() {
           </Button>
         </nav>
 
-        {/* Mobile Navigation */}
         <div className="md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
@@ -124,7 +121,7 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[280px] p-6 flex flex-col bg-background/80 backdrop-blur-xl border-border"> {/* Changed border-border/30 to border-border */}
+            <SheetContent side="right" className="w-[280px] p-6 flex flex-col bg-background/80 backdrop-blur-xl border-border">
               <div className="mb-6">
                 <Link href="/" className="flex items-center gap-2 text-xl font-semibold text-primary" onClick={handleLinkClick}>
                    <Image
