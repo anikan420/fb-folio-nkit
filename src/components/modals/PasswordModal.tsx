@@ -25,7 +25,7 @@ interface PasswordModalProps {
   caseStudyTitle: string;
 }
 
-const CORRECT_PASSWORD = "deepwork"; // Simple hardcoded password
+const CORRECT_PASSWORD = "Vicky56"; // Simple hardcoded password
 
 export function PasswordModal({
   isOpen,
@@ -81,24 +81,17 @@ export function PasswordModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6 flex flex-col items-center">
-        <DialogHeader className="text-center space-y-2 mb-4 w-full">
-          <div className="flex justify-center mb-3">
-            <div className="bg-muted/50 p-3 rounded-lg inline-block">
-              <Lock className="h-6 w-6 text-primary" />
-            </div>
-          </div>
-          <DialogTitle className="text-xl font-semibold text-foreground">Enter Password</DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground">
-            This case study ({caseStudyTitle}) is password protected. Please enter the password to continue.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="w-full max-w-xs">
+      <DialogContent className="sm:max-w-md bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6"> {/* Removed flex flex-col items-center */}
+        {/* DialogHeader removed as title and subtitle are gone, and icon is moved */}
+        <form onSubmit={handleSubmit} className="w-full"> {/* Removed max-w-xs */}
           <div className="space-y-4 py-2">
             <div className="space-y-2 w-full">
-              <Label htmlFor="password_modal_input" className="text-sm font-medium text-center block w-full text-foreground/80">
-                Password
-              </Label>
+              <div className="flex items-center mb-1">
+                <Lock className="h-5 w-5 text-primary mr-2 flex-shrink-0" /> {/* Icon moved here, no bg */}
+                <Label htmlFor="password_modal_input" className="text-sm font-medium text-foreground/80"> {/* Label left-aligned */}
+                  Password
+                </Label>
+              </div>
               <div className="relative">
                 <Input
                   ref={inputRef}
