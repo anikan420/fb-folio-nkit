@@ -93,42 +93,36 @@ export function HeroSection() {
     <section 
       id="hero" 
       className="relative flex min-h-screen items-center justify-center text-center overflow-hidden"
-      // Background styling is now primarily handled by globals.css on the body
-      // Specific patterns for hero section, if needed, can be added here but avoid conflicting with global body background
     >
       <div className="container mx-auto flex max-w-4xl flex-col items-center px-4 py-20 z-10">
         
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl text-foreground min-h-[200px] md:min-h-[280px] lg:min-h-[320px] font-sans">
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight md:text-7xl lg:text-8xl text-foreground min-h-[160px] sm:min-h-[200px] md:min-h-[280px] lg:min-h-[320px] font-sans">
           {displayText.split(" ").map((word, wordIndex) => {
             let currentLineIndex = 0;
             let accumulatedLength = 0;
             let currentWordStartPosInDisplayText = 0;
             
-            // Find current word's start position in displayText
             if (wordIndex === 0) {
                 currentWordStartPosInDisplayText = 0;
             } else {
-                // Iterate through words already in displayText to find the start of the current word
                 let tempPos = 0;
                 for(let i=0; i < wordIndex; i++) {
-                    tempPos += displayText.split(" ")[i].length + 1; // +1 for space
+                    tempPos += displayText.split(" ")[i].length + 1; 
                 }
                 currentWordStartPosInDisplayText = tempPos;
             }
 
-
-            // Determine which line this word belongs to
             let tempLength = 0;
             for(let i = 0; i < fullTextLines.length; i++) {
                 const line = fullTextLines[i];
-                const lineLengthWithSpace = line.length + (i < fullTextLines.length - 1 ? 1 : 0); // Add 1 for space if not last line
+                const lineLengthWithSpace = line.length + (i < fullTextLines.length - 1 ? 1 : 0); 
                 
                 if (currentWordStartPosInDisplayText >= tempLength && currentWordStartPosInDisplayText < tempLength + lineLengthWithSpace) {
                     currentLineIndex = i;
                     break;
                 }
                 tempLength += lineLengthWithSpace;
-                if (i === fullTextLines.length - 1) { // Ensure last word maps to last line if logic above fails
+                if (i === fullTextLines.length - 1) { 
                     currentLineIndex = i;
                 }
             }
@@ -138,8 +132,6 @@ export function HeroSection() {
             const wordsInOriginalLine = originalLine.split(" ");
             const isLastWordOfOriginalLine = word === wordsInOriginalLine[wordsInOriginalLine.length - 1];
             
-            // Check if this word is fully typed out AND is the last word of its line in fullTextLines
-            // The word is fully typed if its end position in displayText is reached or passed
             const endOfWordInDisplayText = currentWordStartPosInDisplayText + word.length;
             const isEndOfThisWordInDisplayText = displayText.length >= endOfWordInDisplayText;
 
@@ -159,8 +151,8 @@ export function HeroSection() {
       </div>
 
       {/* Decorative Sparkles */}
-      <SparkleIcon className="absolute top-[15%] left-[10%] w-10 h-10 md:w-16 md:h-16 text-primary/80 transform -rotate-12 animate-subtle-float" style={{animationDelay: '0s'}} />
-      <SparkleIcon className="absolute bottom-[20%] right-[12%] w-10 h-10 md:w-14 md:h-14 text-primary/80 transform rotate-6 animate-subtle-float" style={{animationDelay: '0.5s'}} />
+      <SparkleIcon className="absolute top-[15%] left-[10%] w-8 h-8 sm:w-10 sm:h-10 md:w-16 md:h-16 text-primary/80 transform -rotate-12 animate-subtle-float" style={{animationDelay: '0s'}} />
+      <SparkleIcon className="absolute bottom-[20%] right-[12%] w-8 h-8 sm:w-10 sm:h-10 md:w-14 md:h-14 text-primary/80 transform rotate-6 animate-subtle-float" style={{animationDelay: '0.5s'}} />
       <SparkleIcon className="absolute top-[25%] right-[20%] w-6 h-6 text-primary/70 transform rotate-45 hidden md:block animate-subtle-pulse" style={{animationDelay: '0.2s'}}/>
       <SparkleIcon className="absolute bottom-[30%] left-[18%] w-8 h-8 text-primary/70 transform -rotate-45 hidden md:block animate-subtle-pulse" style={{animationDelay: '0.7s'}}/>
 

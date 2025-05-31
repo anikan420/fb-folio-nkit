@@ -20,7 +20,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
           <p className="mb-2 text-sm font-medium uppercase tracking-wider text-primary">
             {study.category}
           </p>
-          <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+          <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
             {study.title}
           </h1>
           <p className="text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto">
@@ -124,7 +124,7 @@ export function CaseStudyDetail({ study }: CaseStudyDetailProps) {
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-foreground">Technologies Used</h2>
           <div className="flex flex-wrap gap-2">
             {study.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-[10px] bg-secondary text-secondary-foreground">
+              <Badge key={tag} variant="secondary" className="text-[10px] bg-secondary text-secondary-foreground px-1 py-1">
                 {tag}
               </Badge>
             ))}

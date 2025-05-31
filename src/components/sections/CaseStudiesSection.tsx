@@ -79,15 +79,14 @@ export function CaseStudiesSection(): JSX.Element {
                 role="button"
                 tabIndex={0}
                 className={cn(
-                  "relative grid grid-cols-1 md:grid-cols-2 md:gap-10 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out",
-                  "hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
+                  "relative grid grid-cols-1 md:grid-cols-2 md:gap-10 items-stretch p-6 rounded-xl overflow-hidden bg-card border border-border transition-all duration-300 ease-out hover:shadow-[0_10px_25px_hsl(var(--primary)/0.15)]"
                 )}
                 onClick={() => handleCaseStudyClick(study)}
                 onKeyDown={(e) => handleCardKeyDown(e, study)}
               >
                 <div
                   className={cn(
-                    "transition-transform duration-300 ease-out flex flex-col justify-center",
+                    "transition-transform duration-300 ease-out flex flex-col justify-center", 
                     isTextOnLeft ? "md:order-1" : "md:order-2"
                   )}
                 >
@@ -103,7 +102,7 @@ export function CaseStudiesSection(): JSX.Element {
                   <p className="text-foreground/70 mb-auto text-base leading-relaxed font-sans">
                     {study.description}
                   </p>
-                  <div className="mt-[200px]">
+                  <div className="mt-6"> {/* Changed from mt-[200px] */}
                     <Button
                       variant="link"
                       size="lg"

@@ -12,8 +12,8 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer id="contact" className="bg-background/30 backdrop-blur-lg border-t border-border shadow-lg"> {/* Changed border-border/20 to border-border */}
-      <div className="container mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-8 sm:flex-row sm:px-6 lg:px-8"> {/* Align with header */}
-        <p className="text-sm text-muted-foreground">
+      <div className="container mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row sm:py-8 sm:px-6 lg:px-8"> {/* Align with header, adjusted padding */}
+        <p className="text-sm text-muted-foreground text-center sm:text-left">
           &copy; {new Date().getFullYear()} All rights reserved by Ankit.
         </p>
         <div className="flex space-x-4">
