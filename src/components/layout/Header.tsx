@@ -37,8 +37,8 @@ export function Header() {
   };
 
   const renderNavLink = (item: typeof navItems[0], isMobile: boolean = false) => {
-    const baseClasses = "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-colors";
-    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary transition-colors rounded-md hover:bg-muted/50";
+    const baseClasses = "px-3 py-2 text-sm font-medium text-foreground/70 hover:text-primary hover:font-semibold transition-colors";
+    const mobileClasses = "block px-3 py-2 text-base text-foreground/80 hover:text-primary hover:font-semibold transition-colors rounded-md hover:bg-muted/50";
     const commonClasses = isMobile ? mobileClasses : `${baseClasses} group relative`;
 
 
