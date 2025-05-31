@@ -6,17 +6,14 @@ import { useState, type FormEvent, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
+  DialogClose, // DialogHeader, DialogTitle, DialogDescription, DialogFooter removed for brevity, but DialogFooter is used
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Eye, EyeOff, Lock } from 'lucide-react';
+import { DialogFooter } from '@/components/ui/dialog'; // Ensure DialogFooter is imported
 
 interface PasswordModalProps {
   isOpen: boolean;
@@ -44,6 +41,10 @@ export function PasswordModal({
       setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
+      // Reset form fields when modal opens
+      setPassword('');
+      setError('');
+      setShowPassword(false);
     }
   }, [isOpen]);
 
@@ -56,8 +57,8 @@ export function PasswordModal({
         description: `Redirecting to ${caseStudyTitle}...`,
       });
       onPasswordSuccess();
-      onOpenChange(false);
-      setPassword('');
+      // onOpenChange(false); // This is handled by handleOpenChange or DialogClose
+      // setPassword(''); // Reset is now handled in useEffect on isOpen
     } else {
       setError('Incorrect password. Please try again.');
       toast({
@@ -81,17 +82,16 @@ export function PasswordModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6"> {/* Removed flex flex-col items-center */}
-        {/* DialogHeader removed as title and subtitle are gone, and icon is moved */}
-        <form onSubmit={handleSubmit} className="w-full"> {/* Removed max-w-xs */}
+      <DialogContent className="sm:max-w-md bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6">
+        <div className="flex justify-center mb-6">
+          <Lock className="h-10 w-10 text-primary" />
+        </div>
+        <form onSubmit={handleSubmit} className="w-full">
           <div className="space-y-4 py-2">
             <div className="space-y-2 w-full">
-              <div className="flex items-center mb-1">
-                <Lock className="h-5 w-5 text-primary mr-2 flex-shrink-0" /> {/* Icon moved here, no bg */}
-                <Label htmlFor="password_modal_input" className="text-sm font-medium text-foreground/80"> {/* Label left-aligned */}
-                  Password
-                </Label>
-              </div>
+              <Label htmlFor="password_modal_input" className="block text-left text-sm font-medium text-foreground/80 mb-1">
+                Password
+              </Label>
               <div className="relative">
                 <Input
                   ref={inputRef}
@@ -99,7 +99,7 @@ export function PasswordModal({
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pr-10 rounded-md w-full" 
+                  className="pr-10 rounded-md w-full"
                   placeholder="Enter password"
                   required
                   aria-describedby={error ? "password-error" : undefined}
@@ -119,15 +119,15 @@ export function PasswordModal({
             </div>
             {error && <p id="password-error" className="text-sm text-destructive text-center pt-1">{error}</p>}
           </div>
-          <DialogFooter className="pt-6 flex flex-col items-center space-y-3 w-full">
-            <Button type="submit" className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-md">
-              Unlock
-            </Button>
+          <DialogFooter className="pt-6 flex flex-col items-center space-y-3 w-full sm:flex-row sm:justify-end sm:space-x-2 sm:space-y-0">
             <DialogClose asChild>
-              <Button type="button" variant="link" className="text-muted-foreground hover:text-foreground font-medium">
+              <Button type="button" variant="outline" className="w-full sm:w-auto rounded-md">
                 Cancel
               </Button>
             </DialogClose>
+            <Button type="submit" className="w-full sm:w-auto bg-foreground text-background hover:bg-foreground/90 rounded-md">
+              Unlock
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
