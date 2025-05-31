@@ -6,14 +6,14 @@ import { useState, type FormEvent, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
-  DialogClose, // DialogHeader, DialogTitle, DialogDescription, DialogFooter removed for brevity, but DialogFooter is used
+  DialogClose,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Eye, EyeOff, Lock } from 'lucide-react';
-import { DialogFooter } from '@/components/ui/dialog'; // Ensure DialogFooter is imported
+import { DialogFooter } from '@/components/ui/dialog'; 
 
 interface PasswordModalProps {
   isOpen: boolean;
@@ -41,7 +41,6 @@ export function PasswordModal({
       setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
-      // Reset form fields when modal opens
       setPassword('');
       setError('');
       setShowPassword(false);
@@ -57,8 +56,6 @@ export function PasswordModal({
         description: `Redirecting to ${caseStudyTitle}...`,
       });
       onPasswordSuccess();
-      // onOpenChange(false); // This is handled by handleOpenChange or DialogClose
-      // setPassword(''); // Reset is now handled in useEffect on isOpen
     } else {
       setError('Incorrect password. Please try again.');
       toast({
@@ -82,7 +79,7 @@ export function PasswordModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6">
+      <DialogContent className="sm:max-w-xs bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6">
         <div className="flex justify-center mb-6">
           <Lock className="h-10 w-10 text-primary" />
         </div>
