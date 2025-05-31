@@ -81,22 +81,22 @@ export function PasswordModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md bg-background border border-border shadow-lg rounded-lg p-6 md:p-8 flex flex-col items-center">
+      <DialogContent className="sm:max-w-md bg-card text-card-foreground border border-border/20 shadow-xl rounded-lg p-6 flex flex-col items-center">
         <DialogHeader className="text-center space-y-2 mb-4 w-full">
           <div className="flex justify-center mb-3">
-            <div className="bg-muted p-3 rounded-lg inline-block">
+            <div className="bg-muted/50 p-3 rounded-lg inline-block">
               <Lock className="h-6 w-6 text-primary" />
             </div>
           </div>
-          <DialogTitle className="text-xl font-semibold">Enter Password</DialogTitle>
-          <DialogDescription className="text-sm">
+          <DialogTitle className="text-xl font-semibold text-foreground">Enter Password</DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground">
             This case study ({caseStudyTitle}) is password protected. Please enter the password to continue.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="w-full max-w-xs">
           <div className="space-y-4 py-2">
             <div className="space-y-2 w-full">
-              <Label htmlFor="password_modal_input" className="text-sm font-medium text-center block w-full">
+              <Label htmlFor="password_modal_input" className="text-sm font-medium text-center block w-full text-foreground/80">
                 Password
               </Label>
               <div className="relative">
@@ -106,7 +106,7 @@ export function PasswordModal({
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="pr-10 rounded-[2px] w-full" 
+                  className="pr-10 rounded-md w-full" 
                   placeholder="Enter password"
                   required
                   aria-describedby={error ? "password-error" : undefined}
